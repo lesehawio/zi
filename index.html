@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ZI ✦ چرخه زیستن</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ZI — MONOCHROME + GREEN / GRAY / RED states
+========================================================= */
+:root{
+    --bg:#ffffff;
+    --bg-2:#f7f7f7;
+    --panel:rgba(0,0,0,.02);
+    --panel-2:rgba(0,0,0,.04);
+    --panel-3:rgba(0,0,0,.06);
+    --line:rgba(0,0,0,.06);
+    --line-2:rgba(0,0,0,.1);
+    --line-3:rgba(0,0,0,.16);
+    --ink:#111;
+    --ink-2:#333;
+    --ink-3:#555;
+    --muted:#888;
+    --muted-2:#aaa;
+    --muted-3:#c8c8c8;
+    --accent:#111;
+    --accent-ink:#fff;
+
+    --state-cont:#16a34a;
+    --state-cont-soft:rgba(22,163,74,.08);
+    --state-cont-line:rgba(22,163,74,.25);
+
+    --state-neut:#6b7280;
+    --state-neut-soft:rgba(107,114,128,.08);
+    --state-neut-line:rgba(107,114,128,.22);
+
+    --state-disc:#dc2626;
+    --state-disc-soft:rgba(220,38,38,.08);
+    --state-disc-line:rgba(220,38,38,.25);
+
+    --overlay:rgba(255,255,255,.65);
+    --shadow:0 8px 30px rgba(0,0,0,.06);
+    --shadow-2:0 12px 40px rgba(0,0,0,.12);
+}
+html[data-theme="dark"]{
+    --bg:#0a0a0a;
+    --bg-2:#111;
+    --panel:rgba(255,255,255,.02);
+    --panel-2:rgba(255,255,255,.04);
+    --panel-3:rgba(255,255,255,.06);
+    --line:rgba(255,255,255,.06);
+    --line-2:rgba(255,255,255,.1);
+    --line-3:rgba(255,255,255,.16);
+    --ink:#f5f5f5;
+    --ink-2:#e0e0e0;
+    --ink-3:#c0c0c0;
+    --muted:#888;
+    --muted-2:#5a5a5a;
+    --muted-3:#3a3a3a;
+    --accent:#fff;
+    --accent-ink:#0a0a0a;
+
+    --state-cont:#22c55e;
+    --state-cont-soft:rgba(34,197,94,.1);
+    --state-cont-line:rgba(34,197,94,.28);
+
+    --state-neut:#9ca3af;
+    --state-neut-soft:rgba(156,163,175,.08);
+    --state-neut-line:rgba(156,163,175,.22);
+
+    --state-disc:#ef4444;
+    --state-disc-soft:rgba(239,68,68,.1);
+    --state-disc-line:rgba(239,68,68,.28);
+
+    --overlay:rgba(0,0,0,.65);
+    --shadow:0 8px 30px rgba(0,0,0,.4);
+    --shadow-2:0 12px 40px rgba(0,0,0,.55);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+    font-family:'Inter',Tahoma,sans-serif;
+    background:var(--bg);color:var(--ink);
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    padding:0 16px 24px;transition:background .35s,color .35s;font-size:14px;
+}
+button,input,select{font-family:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+
+/* =========================================================
+   LOGO BIG MOTION — لوگوی بزرگ وسط، با انیمیشن messy
+========================================================= */
+.logo-big-wrap{
+    width:100%;
+    max-width:680px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px 0 30px;
+    min-height:170px;
+}
+.logo-motion{
+    position:relative;
+    width:110px;
+    height:160px;
+    flex-shrink:0;
+    pointer-events:none;
+}
+.logo-motion svg{
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
+.logo-motion .piece{
+    fill:var(--ink);
+    transform-box:fill-box;
+    transform-origin:center;
+    animation-iteration-count:infinite;
+    animation-duration:7s;
+    animation-timing-function:cubic-bezier(.18,.89,.25,1);
+}
+.logo-motion .top-triangle{animation-name:messyTop}
+.logo-motion .bottom-triangle{animation-name:messyBottom}
+.logo-motion .top-bar{animation-name:messyTopBar}
+.logo-motion .bottom-bar{animation-name:messyBottomBar}
+
+@keyframes messyTop{
+    0%{opacity:0;transform:translate(-55px,-60px) rotate(-65deg) scale(.35)}
+    8%{opacity:1;transform:translate(-35px,-30px) rotate(-35deg) scale(.65)}
+    17%{transform:translate(20px,-18px) rotate(42deg) scale(.82)}
+    27%{transform:translate(-12px,14px) rotate(-22deg) scale(1.08)}
+    36%{transform:translate(7px,-7px) rotate(13deg) scale(.96)}
+    43%{transform:translate(-3px,3px) rotate(-5deg) scale(1.02)}
+    48%{transform:translate(0,0) rotate(0) scale(1)}
+    70%{transform:translate(0,0) rotate(0) scale(1);opacity:1}
+    82%{transform:translate(-5px,-4px) rotate(-7deg) scale(1.03)}
+    100%{opacity:0;transform:translate(-55px,-60px) rotate(-65deg) scale(.35)}
+}
+@keyframes messyBottom{
+    0%{opacity:0;transform:translate(65px,60px) rotate(70deg) scale(.3)}
+    9%{opacity:1;transform:translate(40px,35px) rotate(38deg) scale(.55)}
+    18%{transform:translate(-22px,20px) rotate(-48deg) scale(.8)}
+    28%{transform:translate(15px,-12px) rotate(25deg) scale(1.1)}
+    37%{transform:translate(-8px,8px) rotate(-12deg) scale(.94)}
+    44%{transform:translate(4px,-3px) rotate(6deg) scale(1.03)}
+    49%{transform:translate(0,0) rotate(0) scale(1)}
+    70%{transform:translate(0,0) rotate(0) scale(1);opacity:1}
+    82%{transform:translate(5px,4px) rotate(7deg) scale(1.03)}
+    100%{opacity:0;transform:translate(65px,60px) rotate(70deg) scale(.3)}
+}
+@keyframes messyTopBar{
+    0%{opacity:0;transform:translate(55px,-35px) rotate(75deg) scale(.3)}
+    13%{opacity:1;transform:translate(28px,-12px) rotate(35deg) scale(.65)}
+    24%{transform:translate(-12px,9px) rotate(-25deg) scale(1.12)}
+    34%{transform:translate(8px,-5px) rotate(16deg) scale(.92)}
+    44%{transform:translate(-3px,2px) rotate(-5deg) scale(1.04)}
+    50%{transform:translate(0,0) rotate(0) scale(1)}
+    70%{transform:translate(0,0) rotate(0) scale(1);opacity:1}
+    100%{opacity:0;transform:translate(55px,-35px) rotate(75deg) scale(.3)}
+}
+@keyframes messyBottomBar{
+    0%{opacity:0;transform:translate(70px,65px) rotate(-65deg) scale(.25)}
+    11%{opacity:1;transform:translate(40px,35px) rotate(-35deg) scale(.55)}
+    22%{transform:translate(-18px,-8px) rotate(30deg) scale(1.08)}
+    32%{transform:translate(12px,10px) rotate(-17deg) scale(.92)}
+    43%{transform:translate(-5px,-3px) rotate(8deg) scale(1.04)}
+    51%{transform:translate(0,0) rotate(0) scale(1)}
+    70%{transform:translate(0,0) rotate(0) scale(1);opacity:1}
+    100%{opacity:0;transform:translate(70px,65px) rotate(-65deg) scale(.25)}
+}
+
+/* ============ HEADER ============ */
+.header{
+    width:100%;max-width:680px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 0;border-bottom:1px solid var(--line);margin-bottom:24px;
+    min-height:56px;
+}
+.header-left{display:flex;align-items:center;gap:12px}
+.menu-btn{
+    background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-2);
+    width:38px;height:38px;border-radius:10px;font-size:16px;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+}
+.menu-btn:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
+
+.theme-btn{
+    background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-2);
+    width:38px;height:38px;border-radius:10px;font-size:15px;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+}
+.theme-btn:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
+.theme-btn .icon-sun{display:none}
+html[data-theme="dark"] .theme-btn .icon-sun{display:block}
+html[data-theme="dark"] .theme-btn .icon-moon{display:none}
+
+/* ============ COMMAND BOX ============ */
+.command-wrap{width:100%;max-width:680px;position:relative}
+.command-box{
+    background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:6px 6px 6px 14px;display:flex;align-items:center;gap:8px;transition:.3s;
+}
+.command-box:focus-within{border-color:var(--line-3);background:var(--panel-2)}
+.command-box .prefix{color:var(--muted);font-size:14px;flex-shrink:0}
+#command{
+    flex:1;background:transparent;border:none;outline:none;
+    color:var(--ink);font-size:13.5px;padding:11px 0;
+    min-height:42px;font-weight:400;
+}
+#command::placeholder{color:var(--muted-2);font-weight:300}
+
+.actions{display:flex;gap:4px;align-items:center}
+.icon-btn{
+    background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:12.5px;transition:.3s;flex-shrink:0;
+}
+.icon-btn:hover{border-color:var(--line-3);color:var(--ink);background:var(--panel-3)}
+.icon-btn.voice{color:var(--ink);border-color:var(--line-2)}
+.icon-btn.voice.listening{
+    background:var(--ink);color:var(--accent-ink);
+    border-color:var(--ink);animation:pulseMic 1s infinite;
+}
+@keyframes pulseMic{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.icon-btn.filter-btn{
+    width:auto;padding:0 12px;border-radius:20px;gap:5px;
+    font-size:11px;font-weight:500;
+}
+.filter-badge{
+    background:var(--ink);color:var(--accent-ink);
+    font-size:8px;border-radius:50%;width:14px;height:14px;
+    display:none;align-items:center;justify-content:center;font-weight:800;
+}
+
+.voice-live{
+    margin-top:10px;background:var(--panel-2);border:1px solid var(--line-2);
+    border-radius:12px;padding:10px 14px;display:none;align-items:center;gap:10px;font-size:12px;
+}
+.voice-live.show{display:flex}
+.voice-live .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--ink);
+    animation:pulseMic 1s infinite;flex-shrink:0;
+}
+.voice-live .vtext{
+    flex:1;color:var(--ink-2);font-weight:500;
+    min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.voice-live .vtext.empty{color:var(--muted-2);font-weight:400;font-style:italic}
+
+.filter-dropdown{
+    position:absolute;top:calc(100% + 6px);left:0;right:0;
+    background:var(--bg-2);border:1px solid var(--line-2);border-radius:12px;
+    padding:12px 14px;display:none;max-height:240px;overflow-y:auto;
+    z-index:50;box-shadow:var(--shadow-2);
+}
+.filter-dropdown.open{display:block}
+.filter-grid{display:flex;flex-wrap:wrap;gap:5px}
+.filter-chip{
+    background:var(--panel-2);border:1px solid var(--line);border-radius:20px;
+    padding:5px 12px;font-size:11px;color:var(--muted);transition:.25s;
+    display:inline-flex;align-items:center;gap:5px;font-weight:400;
+}
+.filter-chip:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
+.filter-chip.active{background:var(--ink);border-color:var(--ink);color:var(--accent-ink);font-weight:700}
+.filter-chip .count{font-size:9px;opacity:.6}
+.filter-chip .dotc{width:6px;height:6px;border-radius:50%;background:var(--muted-2)}
+.filter-chip[data-f="continuous"] .dotc{background:var(--state-cont)}
+.filter-chip[data-f="neutral"] .dotc{background:var(--state-neut)}
+.filter-chip[data-f="disconnected"] .dotc{background:var(--state-disc)}
+
+/* ============ RESULTS ============ */
+.results{width:100%;max-width:680px;margin-top:14px;display:none}
+.results.visible{display:block}
+.results .count{
+    font-size:11px;color:var(--muted-2);padding:0 4px 10px;display:block;font-weight:400;
+}
+.cards{display:flex;flex-direction:column;gap:10px}
+
+/* ============ CARD ============ */
+.card{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:15px 16px;
+    transition:.3s;position:relative;
+    border-right:3px solid var(--state-neut);
+    animation:cardIn .3s ease both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.card:hover{border-color:var(--line-3);background:var(--panel-2);transform:translateY(-1px)}
+
+.card.continuous{border-right-color:var(--state-cont);background:var(--state-cont-soft)}
+.card.neutral{border-right-color:var(--state-neut)}
+.card.disconnected{border-right-color:var(--state-disc);background:var(--state-disc-soft)}
+.card.archived{
+    border-right-color:var(--muted-3);
+    background:
+        repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(0,0,0,.015) 10px,rgba(0,0,0,.015) 20px),
+        var(--panel);
+    opacity:.7;
+}
+html[data-theme="dark"] .card.archived{
+    background:
+        repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.015) 10px,rgba(255,255,255,.015) 20px),
+        var(--panel);
+}
+html[data-theme="dark"] .card.continuous{background:rgba(34,197,94,.06)}
+html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
+
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card-name{font-size:15px;font-weight:800;line-height:1.5;color:var(--ink)}
+.card-code{
+    margin-top:3px;direction:ltr;text-align:right;
+    color:var(--muted-2);font-size:9.5px;letter-spacing:.6px;
+    font-family:ui-monospace,monospace;
+}
+.card-type{
+    font-size:9.5px;padding:5px 10px;border-radius:999px;
+    background:var(--panel-2);border:1px solid var(--line);
+    color:var(--muted);font-weight:500;flex-shrink:0;white-space:nowrap;
+}
+
+.card-meta{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:8px;
+    margin-top:12px;padding:10px 0;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.card-meta .m-item{display:flex;flex-direction:column;gap:3px;text-align:center}
+.card-meta .m-lbl{font-size:9px;color:var(--muted-2);font-weight:500;letter-spacing:.3px}
+.card-meta .m-val{
+    font-size:11.5px;color:var(--ink-2);font-weight:700;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+
+.card-status{
+    display:flex;align-items:center;gap:8px;margin-top:12px;
+    padding:10px 12px;border-radius:10px;font-size:11.5px;font-weight:700;
+    border:1px solid var(--line);background:var(--panel-2);
+}
+.card-status.continuous{
+    color:var(--state-cont);background:var(--state-cont-soft);border-color:var(--state-cont-line);
+}
+.card-status.neutral{
+    color:var(--state-neut);background:var(--state-neut-soft);border-color:var(--state-neut-line);
+}
+.card-status.disconnected{
+    color:var(--state-disc);background:var(--state-disc-soft);border-color:var(--state-disc-line);
+}
+.card-status.archived{color:var(--muted)}
+.card-status .dot{
+    width:8px;height:8px;border-radius:50%;background:currentColor;
+    box-shadow:0 0 0 3px currentColor;opacity:.85;
+    animation:breathe 2.4s infinite;
+}
+@keyframes breathe{
+    0%,100%{transform:scale(1);opacity:.9}
+    50%{transform:scale(.8);opacity:.55}
+}
+.card-status .hint{
+    margin-right:auto;font-size:10px;color:var(--muted);
+    font-weight:500;padding:3px 8px;border-radius:999px;background:var(--panel-3);
+}
+
+.cycle{height:4px;border-radius:99px;background:var(--panel-3);margin-top:12px;overflow:hidden}
+.cycle-fill{height:100%;border-radius:99px;background:var(--state-neut);transition:width .4s ease}
+.card.continuous .cycle-fill{background:var(--state-cont)}
+.card.disconnected .cycle-fill{background:var(--state-disc)}
+.cycle-label{
+    display:flex;justify-content:space-between;
+    font-size:9px;color:var(--muted-2);margin-top:5px;font-weight:500;
+}
+
+.ops{display:flex;flex-wrap:wrap;gap:5px;margin-top:11px}
+.op{
+    display:inline-flex;align-items:center;gap:5px;font-size:9.5px;
+    padding:4px 10px;border-radius:999px;
+    background:var(--panel-2);border:1px solid var(--line);
+    color:var(--muted-2);font-weight:500;transition:.25s;
+}
+.op.on{background:var(--ink);color:var(--accent-ink);border-color:var(--ink);font-weight:700}
+.op.na{opacity:.35;text-decoration:line-through}
+.op i{font-size:8px}
+
+.quick{display:flex;gap:5px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.quick button{
+    flex:1;border:1px solid var(--line);background:var(--panel-2);border-radius:9px;
+    padding:8px 6px;font-size:10px;color:var(--muted);font-weight:700;
+    transition:.25s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.quick button:hover{border-color:var(--line-3);color:var(--ink);background:var(--panel-3)}
+.quick button.cont{color:var(--state-cont);border-color:var(--state-cont-line)}
+.quick button.cont:hover{background:var(--state-cont-soft)}
+.quick button.disc{color:var(--state-disc);border-color:var(--state-disc-line)}
+.quick button.disc:hover{background:var(--state-disc-soft)}
+
+.card-time{
+    margin-top:10px;font-size:9px;color:var(--muted-3);
+    text-align:left;direction:ltr;font-family:ui-monospace,monospace;
+}
+
+.empty{text-align:center;padding:50px 10px;opacity:.5}
+.empty i{font-size:26px;color:var(--ink-3);display:block;margin-bottom:10px}
+.empty .title{font-size:13px;font-weight:700;color:var(--ink-3)}
+.empty .desc{font-size:11px;color:var(--muted-2);margin-top:4px}
+
+.back-wrap{width:100%;max-width:680px;display:none;margin-top:12px}
+.back-wrap.visible{display:flex}
+.back-btn{
+    background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
+    padding:5px 14px;border-radius:20px;font-size:11px;
+    display:inline-flex;align-items:center;gap:6px;transition:.3s;font-weight:400;
+}
+.back-btn:hover{border-color:var(--line-3);color:var(--ink);background:var(--panel-3)}
+
+.info{
+    margin-top:16px;font-size:10px;color:var(--muted-3);
+    text-align:center;font-weight:400;letter-spacing:.4px;
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar{
+    position:fixed;top:0;right:-100%;width:280px;max-width:82vw;height:100%;
+    background:var(--bg-2);border-left:1px solid var(--line);z-index:1000;
+    padding:20px;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;
+}
+.sidebar.open{right:0}
+.sidebar-overlay{
+    position:fixed;inset:0;background:var(--overlay);
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+    z-index:999;display:none;
+}
+.sidebar-overlay.active{display:block}
+
+.side-header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:16px;
+}
+.side-header .brand{
+    display:flex;align-items:center;gap:10px;font-size:17px;
+    font-weight:800;color:var(--ink);letter-spacing:-.5px;
+}
+.side-header .brand svg{width:22px;height:30px}
+.sidebar-close{
+    background:transparent;border:none;color:var(--muted-2);
+    font-size:16px;cursor:pointer;transition:.25s;
+}
+.sidebar-close:hover{color:var(--ink)}
+
+.side-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:18px}
+.side-stat{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:10px;padding:10px 8px;text-align:center;transition:.25s;
+}
+.side-stat:hover{border-color:var(--line-3);background:var(--panel-2)}
+.side-stat .v{font-size:17px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums}
+.side-stat .l{font-size:9px;color:var(--muted-2);margin-top:2px;font-weight:500}
+.side-stat.cont .v{color:var(--state-cont)}
+.side-stat.neut .v{color:var(--state-neut)}
+.side-stat.disc .v{color:var(--state-disc)}
+
+.side-label{
+    font-size:9px;color:var(--muted-2);font-weight:700;
+    letter-spacing:1px;text-transform:uppercase;padding:0 4px 8px;
+}
+.sidebar-nav{display:flex;flex-direction:column;gap:3px}
+.sidebar-nav .nav-item{
+    display:flex;align-items:center;gap:12px;
+    padding:11px 12px;border-radius:9px;color:var(--muted);
+    transition:.25s;border:none;background:transparent;
+    width:100%;font-size:13px;text-align:right;font-weight:500;
+}
+.sidebar-nav .nav-item:hover{background:var(--panel-2);color:var(--ink)}
+.sidebar-nav .nav-item.active{background:var(--panel-3);color:var(--ink);font-weight:700}
+.sidebar-nav .nav-item i{width:20px;font-size:14px;text-align:center}
+.sidebar-nav .divider{border:none;border-top:1px solid var(--line);margin:8px 0}
+.sidebar-nav .badge{
+    margin-right:auto;background:var(--ink);color:var(--accent-ink);
+    font-size:9px;font-weight:800;border-radius:20px;padding:2px 8px;
+    min-width:20px;text-align:center;
+}
+
+/* ============ JSON ============ */
+.json-overlay{
+    position:fixed;inset:0;background:var(--overlay);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    z-index:1200;display:none;align-items:center;justify-content:center;padding:24px;
+}
+.json-overlay.open{display:flex}
+.json-box{
+    background:var(--bg-2);border:1px solid var(--line-2);border-radius:16px;
+    padding:22px;max-width:680px;width:100%;max-height:82vh;overflow-y:auto;
+}
+.json-header{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--line);
+}
+.json-header h3{
+    font-size:14px;color:var(--ink);font-weight:800;
+    display:flex;align-items:center;gap:8px;
+}
+.close-json{background:transparent;border:none;color:var(--muted-2);font-size:18px;transition:.25s}
+.close-json:hover{color:var(--ink)}
+.json-box pre{
+    font-family:ui-monospace,'Courier New',monospace;font-size:11px;line-height:1.7;
+    color:var(--ink-2);white-space:pre-wrap;word-break:break-all;
+    padding:14px;background:var(--panel);border-radius:10px;
+    border:1px solid var(--line);max-height:52vh;overflow-y:auto;
+}
+.json-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
+.json-actions button{
+    padding:8px 18px;border-radius:20px;border:1px solid var(--line-2);
+    font-size:11.5px;font-weight:700;background:var(--panel-2);color:var(--ink);
+    transition:.25s;display:inline-flex;align-items:center;gap:6px;
+}
+.json-actions button:hover{background:var(--panel-3);border-color:var(--line-3)}
+.json-actions .download-json{background:var(--ink);color:var(--accent-ink);border-color:var(--ink)}
+.json-actions .download-json:hover{opacity:.85}
+
+/* ============ TOAST ============ */
+.toast{
+    position:fixed;bottom:24px;left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:var(--bg-2);border:1px solid var(--line-2);color:var(--ink);
+    padding:10px 20px;border-radius:30px;font-size:12px;font-weight:600;
+    box-shadow:var(--shadow-2);opacity:0;visibility:hidden;transition:.3s;
+    z-index:2000;display:flex;align-items:center;gap:8px;
+}
+.toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ============ MOBILE ============ */
+@media(max-width:600px){
+    body{padding:0 12px 18px}
+    .header{padding:10px 0;margin-bottom:18px}
+    .logo-big-wrap{min-height:130px;padding:14px 0 22px}
+    .logo-motion{width:84px;height:122px}
+    .sidebar{width:260px}
+    #command{font-size:12.5px;min-height:38px}
+    .icon-btn{width:30px;height:30px;font-size:11px}
+    .icon-btn.filter-btn{padding:0 10px;font-size:10px}
+    .card-meta{grid-template-columns:repeat(2,1fr);gap:6px}
+    .json-box{padding:16px}
+    .json-box pre{font-size:10px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="header-left">
+        <button class="menu-btn" id="menuBtn" aria-label="منو">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    <div class="header-right">
+        <button class="theme-btn" id="themeBtn" aria-label="تغییر تم">
+            <i class="fas fa-moon icon-moon"></i>
+            <i class="fas fa-sun icon-sun"></i>
+        </button>
+    </div>
+</header>
+
+<!-- ================= LOGO BIG MOTION ================= -->
+<div class="logo-big-wrap">
+    <div class="logo-motion" aria-hidden="true">
+        <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+            <path class="piece top-triangle"
+                  d="M 25 20 L 185 20 L 105 160 Z
+                     M 58 43 L 152 43 L 105 153 Z"
+                  fill-rule="evenodd"/>
+            <path class="piece bottom-triangle"
+                  d="M 25 300 L 185 300 L 105 160 Z
+                     M 58 277 L 152 277 L 105 167 Z"
+                  fill-rule="evenodd"/>
+            <rect class="piece top-bar" x="195" y="20" width="12" height="65"/>
+            <rect class="piece bottom-bar" x="195" y="91" width="12" height="209"/>
+        </svg>
+    </div>
+</div>
+
+<!-- ================= COMMAND ================= -->
+<div class="command-wrap">
+    <div class="command-box">
+        <i class="fas fa-terminal prefix"></i>
+        <input type="text" id="command"
+               placeholder="مثلاً: پیراهن مشکی شسته شد"
+               autocomplete="off">
+        <div class="actions">
+            <button class="icon-btn filter-btn" id="filterBtn">
+                <i class="fas fa-sliders-h"></i>
+                <span class="filter-badge" id="filterBadge">0</span>
+            </button>
+            <button class="icon-btn voice" id="voiceBtn" title="تایپ صوتی">
+                <i class="fas fa-microphone"></i>
+            </button>
+            <button class="icon-btn" id="clearBtn" title="پاک کردن">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="voice-live" id="voiceLive">
+        <span class="dot"></span>
+        <span class="vtext empty" id="voiceText">در حال گوش دادن...</span>
+    </div>
+
+    <div class="filter-dropdown" id="filterDropdown">
+        <div class="filter-grid" id="filterGrid"></div>
+    </div>
+</div>
+
+<!-- ================= BACK ================= -->
+<div class="back-wrap" id="backWrap">
+    <button class="back-btn" id="backBtn">
+        <i class="fas fa-arrow-right"></i> برگشت
+    </button>
+</div>
+
+<!-- ================= RESULTS ================= -->
+<div class="results" id="results">
+    <span class="count" id="resultCount">۰ مورد</span>
+    <div class="cards" id="cardsContainer"></div>
+</div>
+
+<!-- ================= INFO ================= -->
+<div class="info" id="info">0 مورد</div>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<aside class="sidebar" id="sidebar">
+    <div class="side-header">
+        <div class="brand">
+            <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 25 20 L 185 20 L 105 160 Z M 58 43 L 152 43 L 105 153 Z"
+                      fill="currentColor" fill-rule="evenodd"/>
+                <path d="M 25 300 L 185 300 L 105 160 Z M 58 277 L 152 277 L 105 167 Z"
+                      fill="currentColor" fill-rule="evenodd"/>
+                <rect x="195" y="20" width="12" height="65" rx="2" fill="currentColor"/>
+                <rect x="195" y="91" width="12" height="209" rx="2" fill="currentColor"/>
+            </svg>
+            <span>ZI</span>
+        </div>
+        <button class="sidebar-close" id="closeSidebar">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="side-stats">
+        <div class="side-stat cont">
+            <div class="v" id="sCont">0</div>
+            <div class="l">پیوسته</div>
+        </div>
+        <div class="side-stat neut">
+            <div class="v" id="sNeut">0</div>
+            <div class="l">خنثی</div>
+        </div>
+        <div class="side-stat disc">
+            <div class="v" id="sDisc">0</div>
+            <div class="l">گسسته</div>
+        </div>
+        <div class="side-stat">
+            <div class="v" id="sArch">0</div>
+            <div class="l">بایگانی</div>
+        </div>
+    </div>
+
+    <div class="side-label">ناوبری</div>
+    <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="home">
+            <i class="fas fa-home"></i>
+            <span>صفحه اصلی</span>
+        </button>
+        <button class="nav-item" data-page="explore">
+            <i class="fas fa-compass"></i>
+            <span>اکسپلور</span>
+            <span class="badge" id="badgeAll">0</span>
+        </button>
+        <button class="nav-item" data-page="archive">
+            <i class="fas fa-box-archive"></i>
+            <span>بایگانی</span>
+            <span class="badge" id="badgeArch">0</span>
+        </button>
+        <hr class="divider">
+        <button class="nav-item" data-page="print">
+            <i class="fas fa-print"></i>
+            <span>پرینت JSON</span>
+        </button>
+    </nav>
+</aside>
+
+<!-- ================= JSON OVERLAY ================= -->
+<div class="json-overlay" id="jsonOverlay">
+    <div class="json-box">
+        <div class="json-header">
+            <h3><i class="fas fa-code"></i> خروجی JSON</h3>
+            <button class="close-json" id="closeJson">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <pre id="jsonContent">[]</pre>
+        <div class="json-actions">
+            <button class="copy-json" id="copyJson">
+                <i class="fas fa-copy"></i> کپی
+            </button>
+            <button class="download-json" id="downloadJson">
+                <i class="fas fa-download"></i> دانلود
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- ================= TOAST ================= -->
+<div class="toast" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastText">آماده</span>
+</div>
+
+<script>
+/* =========================================================
+   ZI — Offline (in-memory), سه وضعیت مادر
+   ========================================================= */
+
+/* ---------------- Theme ---------------- */
+const themeBtn = document.getElementById("themeBtn");
+themeBtn.onclick = ()=>{
+    const cur = document.documentElement.getAttribute("data-theme");
+    document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+};
+
+/* =========================================================
+   کد استاندارد ZI — نوع + جنس + رنگ
+========================================================= */
+const TYPES = {
+    "SH":"پیراهن","HD":"هودی","TS":"تیشرت","CP":"کاپشن","PL":"پالتو",
+    "R":"شلوار راحتی","B":"شلوار بیرونی","SHS":"شلوارک","SHA":"شرت",
+    "SW":"عرق‌گیر","BL":"بلوز","SS":"جوراب کوتاه","ST":"جوراب بلند",
+    "BG":"کیف","SHO":"کفش","F":"سایر"
+};
+
+const MATERIALS = {
+    "CO":"پنبه","LI":"کتان","SE":"ابریشم","WO":"پشم","WS":"ترمه",
+    "HE":"کنف","JU":"جوت","LE":"چرم","RA":"رامی","SI":"سیسال",
+    "WA":"آنگورا","WL":"لاما","WM":"موهر","WV":"پشم بکر","AC":"استات",
+    "EA":"الستان","NY":"نایلون","PA":"پلی آمید","QS":"قواصی",
+    "TR":"تیترون","LN":"نخی","LEE":"لی","PL":"پلاستیک","TO":"تریکو",
+    "BR":"برزنت","DS":"دورس"
+};
+
+const COLORS = {
+    "000":"مشکی","001":"سفید","002":"قرمز","003":"سبز","004":"آبی",
+    "005":"زرد","006":"بنفش","007":"نارنجی","008":"خاکستری",
+    "009":"قهوه‌ای","010":"صورتی","011":"رنگارنگ"
+};
+
+/* =========================================================
+   قوانین عملیات بر اساس نوع
+========================================================= */
+function opAllowed(item, op){
+    if(op === "ironed"){
+        return !(item.type === "کفش" || item.type === "حوله");
+    }
+    if(op === "polished"){
+        return item.type === "کفش";
+    }
+    return true;
+}
+
+/* =========================================================
+   الگوهای تشخیص فرمان
+========================================================= */
+const ACTION_PATTERNS = {
+    washed:{weight:12,patterns:[
+        "شسته شد","شسته شده","شسته","شستشو","شستم","شور","شوره زدم",
+        "شوره گیری","تمیز شد","تمیز شده","تمیزش کردم","خشک شویی",
+        "لباسشویی","ماشین شست","انداختم ماشین","ریختم ماشین",
+        "خوابوندم","خیس کردم","صابون زدم","پاک شد","شستن"
+    ]},
+    ironed:{weight:12,patterns:[
+        "اتو شد","اتو شده","اتو","اتو کردم","اتو زدم","اتو کشیدم",
+        "صاف شد","صاف شده","صافش کردم","چین خوردگی رفت","چیناش رفت",
+        "پرس کردم","پرس شد","داغ زدم"
+    ]},
+    placed:{weight:11,patterns:[
+        "سر جاشه","سر جاش","سرجاش","سر جای خودش","سر جای خود",
+        "در کمد","توی کمد","گذاشتم کمد","گذاشتم سر جاش",
+        "برداشتم سر جاش","برداشتم گذاشتم","مرتب کردم","مرتبش کردم",
+        "جمع کردم","جمعش کردم","جمع و جور شد","جا گرفت",
+        "راهی کمد شد","برگشت به کمد","برگشت سر جاش","توی جاش"
+    ]},
+    dried:{weight:10,patterns:[
+        "خشک شد","خشک شده","خشک","خشکش کردم","خشک زدم",
+        "روی بند","رو بند","بند انداختم","پهن کردم","پهنش کردم",
+        "آفتاب خورد","باد خورد","رطوبتش رفت"
+    ]},
+    folded:{weight:9,patterns:[
+        "تا شد","تا شده","تا","تا کردم","تاش کردم","تاشه",
+        "تاکردم","تا زدم","تاش زدم","مرتب تاش کردم"
+    ]},
+    polished:{weight:11,patterns:[
+        "واکس شد","واکس زده","واکس","واکس زدم","واکسش زدم",
+        "براق شد","براقش کردم","برق انداختم","برق زدم",
+        "پولیش کردم","پولیش شد","جلاش دادم","جلا زدم",
+        "رنگ زدم کفش","رنگش کردم"
+    ]},
+    repaired:{weight:11,patterns:[
+        "تعمیر شد","تعمیر شده","تعمیر","تعمیرش کردم",
+        "درست شد","درست شده","درستش کردم","ترمیم شد","ترمیم کردم",
+        "دوختم","دوختش زدم","پینه زدم","چسب زدم","وصله کردم",
+        "خیاط بردم","خیاطی"
+    ]},
+    paired:{weight:9,patterns:[
+        "جفت شد","جفت شده","جفت","جفت کردم","جفتش کردم",
+        "جفتش پیدا شد","لنگه اش پیدا شد","دوتایی شد","کنار هم شد"
+    ]}
+};
+
+const SPECIAL_PATTERNS = {
+    continuous:{weight:15,patterns:[
+        "پیوسته","پیوسته شد","پیوسته کن","کامل شد","آماده شد",
+        "آماده ست","آماده‌ست","اماده ست","تمام شد",
+        "وضعیت پیوسته","پیوسته‌ست","پیوسته باشه","بستن چرخه"
+    ]},
+    disconnected:{weight:15,patterns:[
+        "گسسته","گسسته شد","گسسته کن","گسستگی","قطع شد",
+        "از چرخه خارج","خارج شد","کنار گذاشتم","بیرون بردم",
+        "دیگه آماده نیست","اماده نیست","آماده نیست","نقص داره"
+    ]},
+    neutral:{weight:14,patterns:[
+        "خنثی","خنثی کن","خنثی شد","بی‌طرف","بی طرف",
+        "نه پیوسته نه گسسته","ریست کن","صفر کن","از اول"
+    ]},
+    archive:{weight:14,patterns:[
+        "بایگانی","بایگانی شد","بایگانی کن","بایگانی‌شده",
+        "آرشیو","آرشیو شد","آرشیو کن","کنار گذاشتم بایگانی",
+        "ذخیره کن","از رده خارج","خرج شد"
+    ]},
+    unarchive:{weight:13,patterns:[
+        "از بایگانی خارج","بازگردون","از بایگانی دربیار",
+        "بیارش بیرون","فعالش کن","دوباره فعال","از آرشیو دربیار"
+    ]},
+    dirty:{weight:12,patterns:[
+        "کثیف","کثیف شد","کثیف شده","چرک شد","چرکین شد",
+        "لک شد","لک افتاد","گل شد","گل‌آلود شد","کثیفش کردم"
+    ]},
+    damaged:{weight:12,patterns:[
+        "آسیب","آسیب دیده","آسیب‌دیده","خراب","خراب شد","خراب شده",
+        "پاره","پاره شد","پاره شده","شکست","شکسته","دریده",
+        "سوراخ شد","درز داد","ترکید","صدمه دید"
+    ]},
+    lost:{weight:13,patterns:[
+        "گم","گم شد","گم شده","پیدا نیست","نیست","نیستش",
+        "گمش کردم","مفقود","نمی‌بینمش"
+    ]},
+    torn:{weight:11,patterns:[
+        "نیاز به تعمیر","نیازمند تعمیر","تعمیر لازم","باید بدوزم",
+        "باید تعمیر","دردسر داره"
+    ]}
+};
+
+/* =========================================================
+   Normalization
+========================================================= */
+function norm(v){
+    return String(v||"")
+        .toLowerCase()
+        .replace(/ي/g,"ی").replace(/ى/g,"ی")
+        .replace(/ك/g,"ک").replace(/ة/g,"ه")
+        .replace(/\u200c/g," ")
+        .replace(/[ًٌٍَُِّْ]/g,"")
+        .replace(/[ـ]/g,"")
+        .replace(/[،؛,.!?؟\-_/\\()\[\]{}«»"'`]/g," ")
+        .replace(/\s+/g," ")
+        .trim();
+}
+function tokens(s){ return norm(s).split(" ").filter(Boolean); }
+
+function scorePhrase(normText, tokensArr, phrase){
+    const np = norm(phrase);
+    if(!np) return 0;
+    if(normText.includes(np)) return np.length * 2 + 6;
+    const pt = np.split(" ").filter(Boolean);
+    if(!pt.length) return 0;
+    const allIn = pt.every(p => tokensArr.some(t => t === p || t.startsWith(p) || p.startsWith(t)));
+    if(allIn) return np.length + 3;
+    return 0;
+}
+function bestMatch(normText, tokensArr, patterns){
+    let best = { phrase:"", score:0 };
+    for(const p of patterns){
+        const s = scorePhrase(normText, tokensArr, p);
+        if(s > best.score) best = { phrase:p, score:s };
+    }
+    return best;
+}
+
+function detectActions(text){
+    const normText = norm(text);
+    const tokensArr = tokens(normText);
+    if(!tokensArr.length) return [];
+
+    const results = [];
+
+    for(const key of ["continuous","disconnected","neutral","archive","unarchive"]){
+        const m = bestMatch(normText, tokensArr, SPECIAL_PATTERNS[key].patterns);
+        if(m.score > 0){
+            results.push({ type:key, score:m.score + SPECIAL_PATTERNS[key].weight });
+        }
+    }
+
+    const reasons = [];
+    for(const key of ["dirty","damaged","lost","torn"]){
+        const m = bestMatch(normText, tokensArr, SPECIAL_PATTERNS[key].patterns);
+        if(m.score > 0){
+            reasons.push({ reason:key, score:m.score + SPECIAL_PATTERNS[key].weight });
+        }
+    }
+
+    for(const key of Object.keys(ACTION_PATTERNS)){
+        const m = bestMatch(normText, tokensArr, ACTION_PATTERNS[key].patterns);
+        if(m.score > 0){
+            results.push({ type:key, score:m.score + ACTION_PATTERNS[key].weight });
+        }
+    }
+
+    const contHit = results.find(r=>r.type === "continuous");
+    if(contHit) return [contHit];
+
+    const neutHit = results.find(r=>r.type === "neutral");
+    if(neutHit) return [neutHit];
+
+    const archHit = results.find(r=>r.type === "archive");
+    if(archHit && !results.find(r=>r.type === "unarchive")) return [archHit];
+
+    const discHit = results.find(r=>r.type === "disconnected");
+    if(discHit){
+        reasons.sort((a,b)=>b.score - a.score);
+        const bestReason = reasons[0] || null;
+        return [{ type:"disconnected", reason: bestReason ? bestReason.reason : "نامشخص", score: discHit.score }];
+    }
+    if(reasons.length){
+        reasons.sort((a,b)=>b.score - a.score);
+        return [{ type:"disconnected", reason: reasons[0].reason, score: reasons[0].score }];
+    }
+
+    const uniq = {};
+    results.forEach(r=>{
+        if(!uniq[r.type] || uniq[r.type].score < r.score) uniq[r.type] = r;
+    });
+    return Object.values(uniq);
+}
+
+function reasonLabel(code){
+    const map = {
+        dirty:"کثیف",
+        damaged:"آسیب‌دیده",
+        lost:"مفقود",
+        torn:"نیازمند تعمیر",
+        "نامشخص":"نیازمند رسیدگی"
+    };
+    return map[code] || code;
+}
+
+/* =========================================================
+   Original codes
+========================================================= */
+const ORIGINAL = [
+    "SHLN008","BLI000","HDDS008","SHLN004","SHLI003","SHLI004",
+    "SHLN000","SHKP008","RPL000","RLN000","RQS000","RLN003",
+    "TSTO000","SHSPL000","TSLI000","TSLI004","SHSCO011",
+    "SHSPL004","shoLE000","BGBR000","BGBR000","RCO008",
+    "SHALN009","SHALN002","SHALN002","SHALN004","SHSLN008",
+    "TSCO004","STEA000","SSEA000","SSEA009","STEA000",
+    "STEA000","SHSCO000","SHSPL004","TSTO008"
+];
+
+function decode(code){
+    let typeCode = "";
+    const sorted = Object.keys(TYPES).sort((a,b)=>b.length-a.length);
+    for(const t of sorted){
+        if(code.toUpperCase().startsWith(t)){ typeCode = t; break; }
+    }
+    const rest = code.slice(typeCode.length);
+    const match = rest.match(/(\d{3})$/);
+    let materialCode = "", colorCode = "";
+    if(match){ colorCode = match[1]; materialCode = rest.slice(0,-3); }
+    return { typeCode, materialCode, colorCode };
+}
+
+function makeItem(code,index){
+    const d = decode(code);
+    const type = TYPES[d.typeCode] || "سایر";
+    const material = MATERIALS[d.materialCode] || "";
+    const color = COLORS[d.colorCode] || "";
+    return {
+        id: "zi-" + index + "-" + Math.random().toString(36).slice(2,7),
+        code: code.toUpperCase(),
+        name: [type,color].filter(Boolean).join(" "),
+        type, material, color,
+        master: "neutral",
+        reason: "",
+        operations:{
+            washed:false, ironed:false, placed:false, dried:false,
+            folded:false, polished:false, repaired:false, paired:false
+        },
+        archived: false,
+        updatedAt: null
+    };
+}
+
+let items = ORIGINAL.map(makeItem);
+
+/* ---------------- Master transitions ---------------- */
+function setContinuous(item){
+    item.master = "continuous";
+    item.reason = "";
+    item.archived = false;
+    Object.keys(item.operations).forEach(k=>{ item.operations[k] = false; });
+    item.updatedAt = new Date().toLocaleString("fa-IR");
+}
+function setNeutral(item){
+    item.master = "neutral";
+    item.reason = "";
+    item.archived = false;
+    item.updatedAt = new Date().toLocaleString("fa-IR");
+}
+function setDisconnected(item, reason){
+    item.master = "disconnected";
+    item.reason = reason || "صلاحیت استفاده ندارد";
+    Object.keys(item.operations).forEach(k=>{ item.operations[k] = false; });
+    item.updatedAt = new Date().toLocaleString("fa-IR");
+}
+function setArchived(item){
+    item.archived = true;
+    item.updatedAt = new Date().toLocaleString("fa-IR");
+}
+function setUnarchived(item){
+    item.archived = false;
+    item.master = "neutral";
+    item.reason = "";
+    item.updatedAt = new Date().toLocaleString("fa-IR");
+}
+
+/* ---------------- Cycle completeness ---------------- */
+function getRequiredOps(item){
+    if(item.type === "کفش") return ["washed","polished","placed"];
+    if(item.type === "حوله") return ["washed","placed"];
+    return ["washed","ironed","placed"];
+}
+function checkCycleComplete(item){
+    const required = getRequiredOps(item);
+    return required.every(op => item.operations[op] === true);
+}
+
+/* ---------------- Apply ---------------- */
+function applyMultiple(item, actions){
+    if(!actions || !actions.length) return;
+
+    for(const a of actions){
+        const t = a.type;
+
+        if(t === "continuous"){ setContinuous(item); return; }
+        if(t === "neutral"){ setNeutral(item); return; }
+        if(t === "archive"){ setArchived(item); return; }
+        if(t === "unarchive"){ setUnarchived(item); return; }
+        if(t === "disconnected"){ setDisconnected(item, reasonLabel(a.reason)); return; }
+
+        if(t === "washed"){
+            item.reason = "";
+            if(item.master === "disconnected") item.master = "neutral";
+            item.operations.washed = true;
+            item.updatedAt = new Date().toLocaleString("fa-IR");
+            continue;
+        }
+
+        if(!opAllowed(item, t)) continue;
+
+        if(item.operations[t] !== undefined) item.operations[t] = true;
+        if(t === "repaired"){
+            item.reason = "";
+            if(item.master === "disconnected") item.master = "neutral";
+        }
+        item.updatedAt = new Date().toLocaleString("fa-IR");
+    }
+
+    if(item.master !== "disconnected" && checkCycleComplete(item)){
+        setContinuous(item);
+    } else if(item.master !== "disconnected" && item.master !== "continuous"){
+        item.master = "neutral";
+    }
+}
+
+/* ---------------- Find items ---------------- */
+function findItems(command){
+    const text = norm(command);
+    const byCode = items.filter(i => text.includes(norm(i.code)));
+    if(byCode.length) return byCode;
+    const byName = items.filter(i => text.includes(norm(i.name)));
+    if(byName.length) return byName;
+    return items.filter(i=>{
+        const hasType = text.includes(norm(i.type));
+        const hasColor = i.color && text.includes(norm(i.color));
+        return hasType && hasColor;
+    });
+}
+
+function executeCommand(cmd){
+    cmd = String(cmd||"").trim();
+    if(!cmd) return;
+
+    const found = findItems(cmd);
+    const actions = detectActions(cmd);
+
+    if(!found.length){
+        lastResults = { found: [], error: true };
+        renderResults();
+        showResultsView();
+        return;
+    }
+
+    if(!actions.length){
+        lastResults = { found, info: true };
+        renderResults();
+        showResultsView();
+        toastMsg('مورد پیدا شد — دستوری تشخیص داده نشد');
+        return;
+    }
+
+    applyMultiple(found[0], actions);
+    lastResults = { found, applied: true };
+    renderResults();
+    showResultsView();
+
+    const st = found[0].master;
+    const msg = st === "continuous" ? "✓ " + found[0].name + " آماده‌ی استفاده"
+              : st === "disconnected" ? "◌ " + found[0].name + " گسسته"
+              : "○ " + found[0].name + " خنثی";
+    toastMsg(msg);
+}
+
+function showResultsView(){
+    document.getElementById("results").classList.add("visible");
+    document.getElementById("backWrap").classList.add("visible");
+}
+
+function masterText(item){
+    if(item.archived) return "بایگانی";
+    if(item.master === "continuous") return "پیوسته";
+    if(item.master === "disconnected") return "گسسته";
+    return "خنثی";
+}
+function masterHint(item){
+    if(item.archived) return "خارج از چرخه";
+    if(item.master === "continuous") return "آماده‌ی استفاده";
+    if(item.master === "disconnected") return "صلاحیت استفاده ندارد";
+    return "در چرخه، کامل نیست";
+}
+function escapeHtml(s){
+    return String(s||"")
+        .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;");
+}
+
+/* ---------------- Ops ---------------- */
+const OPS = [
+    {key:"washed",   label:"شسته",       icon:"fa-water"},
+    {key:"ironed",   label:"اتو",        icon:"fa-fire"},
+    {key:"polished", label:"واکس",       icon:"fa-sparkles"},
+    {key:"placed",   label:"سر جایش",    icon:"fa-box"},
+    {key:"dried",    label:"خشک",        icon:"fa-wind"},
+    {key:"folded",   label:"تا شده",     icon:"fa-layer-group"},
+    {key:"repaired", label:"تعمیر",      icon:"fa-screwdriver-wrench"},
+    {key:"paired",   label:"جفت",        icon:"fa-clone"}
+];
+
+let currentFilter = "all";
+let lastQuery = "";
+let lastResults = null;
+
+/* ---------------- Filters ---------------- */
+const FILTERS = [
+    {id:'all',          label:'همه',        icon:'fa-tag'},
+    {id:'continuous',   label:'پیوسته',     icon:'fa-circle',           color:'continuous'},
+    {id:'neutral',      label:'خنثی',       icon:'fa-circle-half-stroke',color:'neutral'},
+    {id:'disconnected', label:'گسسته',      icon:'fa-circle-exclamation',color:'disconnected'},
+    {id:'clothes',      label:'لباس',       icon:'fa-shirt'},
+    {id:'shoes',        label:'کفش',        icon:'fa-shoe-prints'},
+    {id:'towels',       label:'حوله',       icon:'fa-scroll'},
+    {id:'archive',      label:'بایگانی',    icon:'fa-box-archive'}
+];
+
+function renderFilterGrid(){
+    const grid = document.getElementById("filterGrid");
+    grid.innerHTML = FILTERS.map(f=>{
+        let count = 0;
+        if(f.id === 'all') count = items.filter(i=>!i.archived).length;
+        else if(f.id === 'continuous') count = items.filter(i=>!i.archived && i.master === 'continuous').length;
+        else if(f.id === 'neutral') count = items.filter(i=>!i.archived && i.master === 'neutral').length;
+        else if(f.id === 'disconnected') count = items.filter(i=>!i.archived && i.master === 'disconnected').length;
+        else if(f.id === 'clothes') count = items.filter(i=>!i.archived && i.type === 'لباس').length;
+        else if(f.id === 'shoes') count = items.filter(i=>!i.archived && i.type === 'کفش').length;
+        else if(f.id === 'towels') count = items.filter(i=>!i.archived && i.type === 'حوله').length;
+        else if(f.id === 'archive') count = items.filter(i=>i.archived).length;
+
+        const dotc = f.color ? `<span class="dotc"></span>` : '';
+        return `
+            <button class="filter-chip${currentFilter === f.id ? ' active' : ''}" data-f="${f.id}">
+                ${dotc}
+                <i class="fas ${f.icon}"></i>
+                ${f.label}
+                <span class="count">(${count})</span>
+            </button>
+        `;
+    }).join("");
+
+    grid.querySelectorAll('.filter-chip').forEach(chip=>{
+        chip.onclick = ()=>{
+            currentFilter = chip.dataset.f;
+            const badge = document.getElementById("filterBadge");
+            if(currentFilter === 'all') badge.style.display = 'none';
+            else { badge.style.display = 'flex'; badge.textContent = '1'; }
+            renderFilterGrid();
+            renderResults();
+            showResultsView();
+            document.getElementById("filterDropdown").classList.remove("open");
+        };
+    });
+}
+
+/* ---------------- Render results ---------------- */
+function renderResults(){
+    let list = items.slice();
+
+    if(currentFilter === "archive"){
+        list = list.filter(i=>i.archived);
+    }else{
+        list = list.filter(i=>!i.archived);
+        if(currentFilter === "continuous") list = list.filter(i=>i.master === "continuous");
+        if(currentFilter === "neutral") list = list.filter(i=>i.master === "neutral");
+        if(currentFilter === "disconnected") list = list.filter(i=>i.master === "disconnected");
+        if(currentFilter === "clothes") list = list.filter(i=>i.type === "لباس");
+        if(currentFilter === "shoes") list = list.filter(i=>i.type === "کفش");
+        if(currentFilter === "towels") list = list.filter(i=>i.type === "حوله");
+    }
+
+    const q = norm(lastQuery || "");
+    if(q){
+        list = list.filter(i=>{
+            const hay = norm([i.name, i.code, i.type, i.material, i.color, i.reason].join(" "));
+            return hay.includes(q);
+        });
+    }
+
+    if(lastResults && lastResults.found && lastResults.found.length){
+        const ids = new Set(lastResults.found.map(x=>x.id));
+        const top = lastResults.found.filter(x=>{
+            if(currentFilter === "archive") return x.archived;
+            return !x.archived;
+        });
+        const rest = list.filter(x=>!ids.has(x.id));
+        list = top.concat(rest);
+    }
+
+    document.getElementById("resultCount").textContent = `${list.length} مورد`;
+
+    if(!list.length){
+        document.getElementById("cardsContainer").innerHTML = `
+            <div class="empty">
+                <i class="fas fa-box-open"></i>
+                <div class="title">چیزی پیدا نشد</div>
+                <div class="desc">با دستور یا فیلتر دیگری امتحان کن</div>
+            </div>
+        `;
+        return;
+    }
+
+    document.getElementById("cardsContainer").innerHTML = list.map(renderCard).join("");
+}
+
+/* ---------------- Render card ---------------- */
+function renderCard(item){
+    const stateClass = item.archived ? "archived" : item.master;
+    const required = getRequiredOps(item);
+    const doneRequired = required.filter(op => item.operations[op]).length;
+    let pct;
+    if(item.archived) pct = 100;
+    else if(item.master === "continuous") pct = 100;
+    else if(item.master === "disconnected") pct = 0;
+    else pct = Math.round((doneRequired / required.length) * 100);
+
+    const opsHtml = OPS.map(o=>{
+        const allowed = opAllowed(item, o.key);
+        const on = item.operations[o.key];
+        const cls = !allowed ? "na" : (on ? "on" : "");
+        const ic = !allowed ? "fa-ban" : (on ? "fa-check" : o.icon);
+        return `<span class="op ${cls}">
+                    <i class="fas ${ic}"></i>
+                    ${o.label}
+                </span>`;
+    }).join("");
+
+    let stateLabel, stateHint, stateIcon;
+    if(item.archived){
+        stateLabel = "بایگانی"; stateHint = "خارج از چرخه"; stateIcon = "fa-box-archive";
+    }else if(item.master === "continuous"){
+        stateLabel = "پیوسته"; stateHint = "آماده‌ی استفاده"; stateIcon = "fa-circle-check";
+    }else if(item.master === "disconnected"){
+        stateLabel = "گسسته"; stateHint = item.reason || "صلاحیت استفاده ندارد"; stateIcon = "fa-circle-exclamation";
+    }else{
+        stateLabel = "خنثی"; stateHint = "در چرخه، کامل نیست"; stateIcon = "fa-circle-half-stroke";
+    }
+
+    let quick = "";
+    if(item.archived){
+        quick = `<div class="quick">
+            <button onclick="quickUnarchive('${item.id}')">
+                <i class="fas fa-rotate-left"></i> بازگرداندن از بایگانی
+            </button>
+        </div>`;
+    }else{
+        quick = `<div class="quick">
+            <button class="cont" onclick="quickContinuous('${item.id}')">
+                <i class="fas fa-circle-check"></i> پیوسته
+            </button>
+            <button onclick="quickNeutral('${item.id}')">
+                <i class="fas fa-circle-half-stroke"></i> خنثی
+            </button>
+            <button class="disc" onclick="quickDisconnect('${item.id}')">
+                <i class="fas fa-circle-exclamation"></i> گسسته
+            </button>
+            <button onclick="quickArchive('${item.id}')">
+                <i class="fas fa-box-archive"></i> بایگانی
+            </button>
+        </div>`;
+    }
+
+    return `
+        <article class="card ${stateClass}">
+            <div class="card-head">
+                <div style="flex:1;min-width:0">
+                    <div class="card-name">${escapeHtml(item.name)}</div>
+                    <div class="card-code">${escapeHtml(item.code)}</div>
+                </div>
+                <span class="card-type">${escapeHtml(item.type)}</span>
+            </div>
+
+            <div class="card-meta">
+                <div class="m-item">
+                    <span class="m-lbl">جنس</span>
+                    <span class="m-val">${escapeHtml(item.material || "—")}</span>
+                </div>
+                <div class="m-item">
+                    <span class="m-lbl">رنگ</span>
+                    <span class="m-val">${escapeHtml(item.color || "—")}</span>
+                </div>
+            </div>
+
+            <div class="card-status ${stateClass}">
+                <span class="dot"></span>
+                <i class="fas ${stateIcon}"></i>
+                <span>${stateLabel}</span>
+                <span class="hint">${escapeHtml(stateHint)}</span>
+            </div>
+
+            <div class="cycle"><div class="cycle-fill" style="width:${pct}%"></div></div>
+            <div class="cycle-label">
+                <span>چرخه</span>
+                <span>${doneRequired} از ${required.length} عملیات لازم</span>
+            </div>
+
+            <div class="ops">${opsHtml}</div>
+            ${quick}
+            ${item.updatedAt ? `<div class="card-time">آخرین تغییر: ${escapeHtml(item.updatedAt)}</div>` : ""}
+        </article>
+    `;
+}
+
+/* ---------------- Quick actions ---------------- */
+function findItem(id){ return items.find(x=>x.id === id); }
+
+function quickContinuous(id){
+    const item = findItem(id); if(!item) return;
+    setContinuous(item); renderResults(); updateInfo();
+    toastMsg("✓ " + item.name + " آماده‌ی استفاده");
+}
+function quickNeutral(id){
+    const item = findItem(id); if(!item) return;
+    setNeutral(item); renderResults(); updateInfo();
+    toastMsg("○ " + item.name + " خنثی");
+}
+function quickDisconnect(id){
+    const item = findItem(id); if(!item) return;
+    setDisconnected(item, "صلاحیت استفاده ندارد"); renderResults(); updateInfo();
+    toastMsg("◌ " + item.name + " گسسته");
+}
+function quickArchive(id){
+    const item = findItem(id); if(!item) return;
+    setArchived(item); renderResults(); updateInfo();
+    toastMsg("⌁ " + item.name + " بایگانی شد");
+}
+function quickUnarchive(id){
+    const item = findItem(id); if(!item) return;
+    setUnarchived(item); renderResults(); updateInfo();
+    toastMsg("↺ " + item.name + " از بایگانی خارج شد");
+}
+window.quickContinuous = quickContinuous;
+window.quickNeutral = quickNeutral;
+window.quickDisconnect = quickDisconnect;
+window.quickArchive = quickArchive;
+window.quickUnarchive = quickUnarchive;
+
+/* ---------------- Filter button ---------------- */
+const filterBtn = document.getElementById("filterBtn");
+const filterDropdown = document.getElementById("filterDropdown");
+filterBtn.onclick = e=>{
+    e.stopPropagation();
+    filterDropdown.classList.toggle("open");
+};
+document.addEventListener("click", ()=> filterDropdown.classList.remove("open"));
+
+/* ---------------- Command input ---------------- */
+const commandInput = document.getElementById("command");
+document.getElementById("clearBtn").onclick = ()=>{
+    commandInput.value = "";
+    lastQuery = "";
+    lastResults = null;
+    document.getElementById("results").classList.remove("visible");
+    document.getElementById("backWrap").classList.remove("visible");
+};
+commandInput.addEventListener("input", ()=>{
+    lastQuery = commandInput.value;
+    if(lastQuery.trim()){
+        renderResults();
+        showResultsView();
+    }else{
+        document.getElementById("results").classList.remove("visible");
+        document.getElementById("backWrap").classList.remove("visible");
+    }
+});
+commandInput.addEventListener("keydown", e=>{
+    if(e.key === "Enter") executeCommand(commandInput.value);
+});
+
+/* ---------------- Voice ---------------- */
+const voiceBtn = document.getElementById("voiceBtn");
+const voiceLive = document.getElementById("voiceLive");
+const voiceText = document.getElementById("voiceText");
+const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+let recognition = null;
+let listening = false;
+
+if(Recognition){
+    recognition = new Recognition();
+    recognition.lang = "fa-IR";
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 3;
+
+    voiceBtn.onclick = ()=>{
+        if(listening){ try{ recognition.stop(); }catch(e){} return; }
+        try{ recognition.start(); }catch(e){}
+    };
+    recognition.onstart = ()=>{
+        listening = true;
+        voiceBtn.classList.add("listening");
+        voiceBtn.innerHTML = '<i class="fas fa-stop"></i>';
+        voiceLive.classList.add("show");
+        voiceText.textContent = "در حال گوش دادن...";
+        voiceText.classList.add("empty");
+    };
+    recognition.onresult = (event)=>{
+        let transcript = "";
+        let isFinal = false;
+        for(let i=event.resultIndex; i<event.results.length; i++){
+            transcript += event.results[i][0].transcript;
+            if(event.results[i].isFinal) isFinal = true;
+        }
+        voiceText.textContent = transcript || "در حال گوش دادن...";
+        voiceText.classList.toggle("empty", !transcript);
+        if(isFinal){
+            commandInput.value = transcript;
+            lastQuery = transcript;
+            setTimeout(()=> executeCommand(transcript), 200);
+        }
+    };
+    recognition.onend = ()=>{
+        listening = false;
+        voiceBtn.classList.remove("listening");
+        voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+        setTimeout(()=>{
+            voiceLive.classList.remove("show");
+            voiceText.textContent = "در حال گوش دادن...";
+            voiceText.classList.add("empty");
+        }, 900);
+    };
+    recognition.onerror = ()=>{
+        listening = false;
+        voiceBtn.classList.remove("listening");
+        voiceBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+        voiceText.textContent = "خطا در دریافت صدا";
+        setTimeout(()=> voiceLive.classList.remove("show"), 1200);
+    };
+}else{
+    voiceBtn.onclick = ()=> toastMsg('مرورگر از تشخیص صوتی پشتیبانی نمی‌کند');
+}
+
+/* ---------------- Sidebar ---------------- */
+const sidebar = document.getElementById("sidebar");
+const sidebarOverlay = document.getElementById("sidebarOverlay");
+const menuBtn = document.getElementById("menuBtn");
+const closeSidebar = document.getElementById("closeSidebar");
+
+function openSidebar(){
+    sidebar.classList.add("open");
+    sidebarOverlay.classList.add("active");
+}
+function closeSidebarPanel(){
+    sidebar.classList.remove("open");
+    sidebarOverlay.classList.remove("active");
+}
+menuBtn.onclick = openSidebar;
+closeSidebar.onclick = closeSidebarPanel;
+sidebarOverlay.onclick = closeSidebarPanel;
+document.addEventListener("keydown", e=>{
+    if(e.key === "Escape"){ closeSidebarPanel(); closeJson(); }
+});
+
+document.querySelectorAll('.sidebar-nav .nav-item').forEach(item=>{
+    item.onclick = ()=>{
+        const page = item.dataset.page;
+        document.querySelectorAll('.sidebar-nav .nav-item').forEach(i=>i.classList.remove('active'));
+        item.classList.add('active');
+
+        if(page === 'home'){
+            currentFilter = 'all'; lastQuery = ''; lastResults = null;
+            commandInput.value = '';
+            document.getElementById("results").classList.remove("visible");
+            document.getElementById("backWrap").classList.remove("visible");
+            document.getElementById("filterBadge").style.display = 'none';
+            renderFilterGrid(); closeSidebarPanel(); return;
+        }
+        if(page === 'explore'){
+            currentFilter = 'all'; lastQuery = ''; lastResults = null;
+            commandInput.value = '';
+            renderFilterGrid(); renderResults(); showResultsView();
+            document.getElementById("filterBadge").style.display = 'none';
+            closeSidebarPanel(); return;
+        }
+        if(page === 'archive'){
+            currentFilter = 'archive';
+            renderFilterGrid(); renderResults(); showResultsView();
+            const badge = document.getElementById("filterBadge");
+            badge.style.display = 'flex'; badge.textContent = '1';
+            closeSidebarPanel(); return;
+        }
+        if(page === 'print'){ openJson(); closeSidebarPanel(); return; }
+        closeSidebarPanel();
+    };
+});
+
+/* ---------------- Back ---------------- */
+document.getElementById("backBtn").onclick = ()=>{
+    currentFilter = 'all'; lastQuery = ''; lastResults = null;
+    commandInput.value = '';
+    document.getElementById("results").classList.remove("visible");
+    document.getElementById("backWrap").classList.remove("visible");
+    document.getElementById("filterBadge").style.display = 'none';
+    renderFilterGrid(); updateInfo();
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(i=>i.classList.remove('active'));
+    document.querySelector('.sidebar-nav .nav-item[data-page="home"]').classList.add('active');
+};
+
+/* ---------------- JSON ---------------- */
+const jsonOverlay = document.getElementById("jsonOverlay");
+const jsonContent = document.getElementById("jsonContent");
+
+function openJson(){
+    const data = items.map(x=>({
+        code:x.code, name:x.name, type:x.type,
+        material:x.material, color:x.color,
+        master:x.master, reason:x.reason,
+        operations:x.operations, archived:!!x.archived,
+        updatedAt:x.updatedAt
+    }));
+    jsonContent.textContent = JSON.stringify(data, null, 2);
+    jsonOverlay.classList.add("open");
+}
+function closeJson(){ jsonOverlay.classList.remove("open"); }
+document.getElementById("closeJson").onclick = closeJson;
+jsonOverlay.onclick = e=>{ if(e.target === jsonOverlay) closeJson(); };
+document.getElementById("copyJson").onclick = ()=>{
+    navigator.clipboard.writeText(jsonContent.textContent)
+        .then(()=> toastMsg('JSON کپی شد'))
+        .catch(()=> toastMsg('خطا در کپی'));
+};
+document.getElementById("downloadJson").onclick = ()=>{
+    const blob = new Blob([jsonContent.textContent], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `zi_export_${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toastMsg('دانلود شد');
+};
+
+/* ---------------- Toast ---------------- */
+let toastTimer = null;
+function toastMsg(msg){
+    const t = document.getElementById("toast");
+    document.getElementById("toastText").textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> t.classList.remove("show"), 2400);
+}
+
+/* ---------------- Stats ---------------- */
+function updateInfo(){
+    const cont = items.filter(i=>!i.archived && i.master === 'continuous').length;
+    const neut = items.filter(i=>!i.archived && i.master === 'neutral').length;
+    const disc = items.filter(i=>!i.archived && i.master === 'disconnected').length;
+    const arch = items.filter(i=>i.archived).length;
+
+    document.getElementById("sCont").textContent = cont;
+    document.getElementById("sNeut").textContent = neut;
+    document.getElementById("sDisc").textContent = disc;
+    document.getElementById("sArch").textContent = arch;
+
+    document.getElementById("badgeAll").textContent = cont + neut + disc;
+    document.getElementById("badgeArch").textContent = arch;
+
+    document.getElementById("info").textContent =
+        `${cont} پیوسته • ${neut} خنثی • ${disc} گسسته • ${arch} بایگانی`;
+}
+
+/* ---------------- Init ---------------- */
+document.documentElement.setAttribute("data-theme", "dark");
+renderFilterGrid();
+updateInfo();
+</script>
+
+</body>
+</html>
