@@ -25,6 +25,10 @@
     --accent:#111;
     --accent-ink:#fff;
 
+    --gold:#c9a55a;
+    --gold-soft:rgba(201,165,90,.08);
+    --gold-line:rgba(201,165,90,.25);
+
     --state-cont:#16a34a;
     --state-cont-soft:rgba(22,163,74,.08);
     --state-cont-line:rgba(22,163,74,.25);
@@ -59,6 +63,10 @@ html[data-theme="dark"]{
     --accent:#fff;
     --accent-ink:#0a0a0a;
 
+    --gold:#d9ba74;
+    --gold-soft:rgba(217,186,116,.08);
+    --gold-line:rgba(217,186,116,.25);
+
     --state-cont:#22c55e;
     --state-cont-soft:rgba(34,197,94,.1);
     --state-cont-line:rgba(34,197,94,.28);
@@ -87,13 +95,38 @@ body{
 button,input,select{font-family:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
 
+/* ===== HEADER ===== */
+.header{
+    width:100%;max-width:680px;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:18px;
+    min-height:52px;
+}
+.header-left{display:flex;align-items:center;gap:12px}
+.menu-btn{
+    background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-2);
+    width:38px;height:38px;border-radius:10px;font-size:16px;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+}
+.menu-btn:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
+
+.theme-btn{
+    background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-2);
+    width:38px;height:38px;border-radius:10px;font-size:15px;
+    display:flex;align-items:center;justify-content:center;transition:.3s;
+}
+.theme-btn:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
+.theme-btn .icon-sun{display:none}
+html[data-theme="dark"] .theme-btn .icon-sun{display:block}
+html[data-theme="dark"] .theme-btn .icon-moon{display:none}
+
 /* ===== LOGO BIG MOTION ===== */
 .logo-big-wrap{
     width:100%;max-width:680px;display:flex;justify-content:center;
     align-items:center;padding:20px 0 30px;min-height:170px;
 }
 .logo-motion{
-    position:relative;width:110px;height:160px;flex-shrink:0;pointer-events:none;
+    position:relative;width:100px;height:145px;flex-shrink:0;pointer-events:none;
 }
 .logo-motion svg{width:100%;height:100%;overflow:visible}
 .logo-motion .piece{
@@ -150,31 +183,6 @@ button{cursor:pointer;border:0;background:none}
     70%{transform:translate(0,0) rotate(0) scale(1);opacity:1}
     100%{opacity:0;transform:translate(70px,65px) rotate(-65deg) scale(.25)}
 }
-
-/* ===== HEADER ===== */
-.header{
-    width:100%;max-width:680px;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px 0;border-bottom:1px solid var(--line);margin-bottom:24px;
-    min-height:56px;
-}
-.header-left{display:flex;align-items:center;gap:12px}
-.menu-btn{
-    background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-2);
-    width:38px;height:38px;border-radius:10px;font-size:16px;
-    display:flex;align-items:center;justify-content:center;transition:.3s;
-}
-.menu-btn:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
-
-.theme-btn{
-    background:var(--panel-2);border:1px solid var(--line-2);color:var(--ink-2);
-    width:38px;height:38px;border-radius:10px;font-size:15px;
-    display:flex;align-items:center;justify-content:center;transition:.3s;
-}
-.theme-btn:hover{background:var(--panel-3);border-color:var(--line-3);color:var(--ink)}
-.theme-btn .icon-sun{display:none}
-html[data-theme="dark"] .theme-btn .icon-sun{display:block}
-html[data-theme="dark"] .theme-btn .icon-moon{display:none}
 
 /* ===== COMMAND ===== */
 .command-wrap{width:100%;max-width:680px;position:relative}
@@ -250,6 +258,7 @@ html[data-theme="dark"] .theme-btn .icon-moon{display:none}
 .filter-chip[data-f="continuous"] .dotc{background:var(--state-cont)}
 .filter-chip[data-f="neutral"] .dotc{background:var(--state-neut)}
 .filter-chip[data-f="disconnected"] .dotc{background:var(--state-disc)}
+.filter-chip[data-f="archive"] .dotc{background:var(--gold)}
 
 /* ===== RESULTS ===== */
 .results{width:100%;max-width:680px;margin-top:14px;display:none}
@@ -276,19 +285,19 @@ html[data-theme="dark"] .theme-btn .icon-moon{display:none}
 .card.neutral{border-right-color:var(--state-neut)}
 .card.disconnected{border-right-color:var(--state-disc);background:var(--state-disc-soft)}
 .card.archived{
-    border-right-color:var(--muted-3);
+    border-right-color:var(--gold);
     background:
-        repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(0,0,0,.015) 10px,rgba(0,0,0,.015) 20px),
+        repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(201,165,90,.03) 10px,rgba(201,165,90,.03) 20px),
         var(--panel);
-    opacity:.7;
-}
-html[data-theme="dark"] .card.archived{
-    background:
-        repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,.015) 10px,rgba(255,255,255,.015) 20px),
-        var(--panel);
+    opacity:.75;
 }
 html[data-theme="dark"] .card.continuous{background:rgba(34,197,94,.06)}
 html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
+html[data-theme="dark"] .card.archived{
+    background:
+        repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(217,186,116,.03) 10px,rgba(217,186,116,.03) 20px),
+        var(--panel);
+}
 
 .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .card-name{font-size:15px;font-weight:800;line-height:1.5;color:var(--ink)}
@@ -329,7 +338,9 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 .card-status.disconnected{
     color:var(--state-disc);background:var(--state-disc-soft);border-color:var(--state-disc-line);
 }
-.card-status.archived{color:var(--muted)}
+.card-status.archived{
+    color:var(--gold);background:var(--gold-soft);border-color:var(--gold-line);
+}
 .card-status .dot{
     width:8px;height:8px;border-radius:50%;background:currentColor;
     box-shadow:0 0 0 3px currentColor;opacity:.85;
@@ -348,6 +359,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 .cycle-fill{height:100%;border-radius:99px;background:var(--state-neut);transition:width .4s ease}
 .card.continuous .cycle-fill{background:var(--state-cont)}
 .card.disconnected .cycle-fill{background:var(--state-disc)}
+.card.archived .cycle-fill{background:var(--gold)}
 .cycle-label{
     display:flex;justify-content:space-between;
     font-size:9px;color:var(--muted-2);margin-top:5px;font-weight:500;
@@ -375,6 +387,8 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 .quick button.cont:hover{background:var(--state-cont-soft)}
 .quick button.disc{color:var(--state-disc);border-color:var(--state-disc-line)}
 .quick button.disc:hover{background:var(--state-disc-soft)}
+.quick button.gold{color:var(--gold);border-color:var(--gold-line)}
+.quick button.gold:hover{background:var(--gold-soft)}
 
 .card-time{
     margin-top:10px;font-size:9px;color:var(--muted-3);
@@ -402,7 +416,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 
 /* ===== SIDEBAR ===== */
 .sidebar{
-    position:fixed;top:0;right:-100%;width:280px;max-width:82vw;height:100%;
+    position:fixed;top:0;right:-100%;width:300px;max-width:85vw;height:100%;
     background:var(--bg-2);border-left:1px solid var(--line);z-index:1000;
     padding:20px;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;
 }
@@ -429,21 +443,33 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 }
 .sidebar-close:hover{color:var(--ink)}
 
-.side-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:18px}
+/* stats grid در سایدبار */
+.side-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:18px}
 .side-stat{
     background:var(--panel);border:1px solid var(--line);
-    border-radius:10px;padding:10px 8px;text-align:center;transition:.25s;
+    border-radius:11px;padding:12px 8px;text-align:center;transition:.25s;
+    position:relative;overflow:hidden;
 }
+.side-stat::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--muted-2);
+}
+.side-stat.cont::before{background:var(--state-cont)}
+.side-stat.neut::before{background:var(--state-neut)}
+.side-stat.disc::before{background:var(--state-disc)}
+.side-stat.arch::before{background:var(--gold)}
 .side-stat:hover{border-color:var(--line-3);background:var(--panel-2)}
-.side-stat .v{font-size:17px;font-weight:900;color:var(--ink);font-variant-numeric:tabular-nums}
-.side-stat .l{font-size:9px;color:var(--muted-2);margin-top:2px;font-weight:500}
+.side-stat .v{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums}
+.side-stat .l{font-size:9.5px;color:var(--muted-2);margin-top:3px;font-weight:500}
 .side-stat.cont .v{color:var(--state-cont)}
 .side-stat.neut .v{color:var(--state-neut)}
 .side-stat.disc .v{color:var(--state-disc)}
+.side-stat.arch .v{color:var(--gold)}
 
 .side-label{
     font-size:9px;color:var(--muted-2);font-weight:700;
     letter-spacing:1px;text-transform:uppercase;padding:0 4px 8px;
+    margin-top:6px;
 }
 .sidebar-nav{display:flex;flex-direction:column;gap:3px}
 .sidebar-nav .nav-item{
@@ -462,10 +488,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     min-width:20px;text-align:center;
 }
 .sidebar-nav .nav-item.danger i{color:var(--state-disc)}
-.sidebar-nav .nav-item.danger:hover{
-    background:var(--state-disc-soft);
-    color:var(--state-disc);
-}
+.sidebar-nav .nav-item.danger:hover{background:var(--state-disc-soft);color:var(--state-disc)}
 
 /* ===== JSON ===== */
 .json-overlay{
@@ -515,24 +538,12 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 }
 .toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
 
-/* ===== SAVE INDICATOR ===== */
-.save-dot{
-    width:7px;height:7px;border-radius:50%;background:var(--state-cont);
-    margin-right:auto;opacity:0;transition:opacity .3s;
-}
-.save-dot.flash{animation:flashDot .6s ease}
-@keyframes flashDot{
-    0%{opacity:0;transform:scale(.5)}
-    30%{opacity:1;transform:scale(1.4)}
-    100%{opacity:.6;transform:scale(1)}
-}
-
 @media(max-width:600px){
     body{padding:0 12px 18px}
-    .header{padding:10px 0;margin-bottom:18px}
-    .logo-big-wrap{min-height:130px;padding:14px 0 22px}
+    .header{padding:10px 0;margin-bottom:14px}
+    .logo-big-wrap{min-height:140px;padding:14px 0 22px}
     .logo-motion{width:84px;height:122px}
-    .sidebar{width:260px}
+    .sidebar{width:280px}
     #command{font-size:12.5px;min-height:38px}
     .icon-btn{width:30px;height:30px;font-size:11px}
     .icon-btn.filter-btn{padding:0 10px;font-size:10px}
@@ -623,7 +634,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 </div>
 
 <!-- ===== INFO ===== -->
-<div class="info" id="info">0 مورد</div>
+<div class="info" id="info">۰ مورد</div>
 
 <!-- ===== SIDEBAR ===== -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
@@ -658,13 +669,13 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
             <div class="v" id="sDisc">0</div>
             <div class="l">گسسته</div>
         </div>
-        <div class="side-stat">
+        <div class="side-stat arch">
             <div class="v" id="sArch">0</div>
             <div class="l">بایگانی</div>
         </div>
     </div>
 
-    <div class="side-label">ناوبری</div>
+    <div class="side-label">نمایش</div>
     <nav class="sidebar-nav">
         <button class="nav-item active" data-page="home">
             <i class="fas fa-home"></i>
@@ -675,18 +686,40 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
             <span>اکسپلور</span>
             <span class="badge" id="badgeAll">0</span>
         </button>
+        <button class="nav-item" data-page="continuous">
+            <i class="fas fa-circle-check" style="color:var(--state-cont)"></i>
+            <span>پیوسته</span>
+            <span class="badge" id="badgeCont">0</span>
+        </button>
+        <button class="nav-item" data-page="neutral">
+            <i class="fas fa-circle-half-stroke" style="color:var(--state-neut)"></i>
+            <span>خنثی</span>
+            <span class="badge" id="badgeNeut">0</span>
+        </button>
+        <button class="nav-item" data-page="disconnected">
+            <i class="fas fa-circle-exclamation" style="color:var(--state-disc)"></i>
+            <span>گسسته</span>
+            <span class="badge" id="badgeDisc">0</span>
+        </button>
         <button class="nav-item" data-page="archive">
-            <i class="fas fa-box-archive"></i>
+            <i class="fas fa-box-archive" style="color:var(--gold)"></i>
             <span>بایگانی</span>
             <span class="badge" id="badgeArch">0</span>
         </button>
-        <hr class="divider">
+        <button class="nav-item" data-page="last">
+            <i class="fas fa-clock-rotate-left"></i>
+            <span>آخرین تغییرات</span>
+        </button>
+    </nav>
+
+    <hr class="divider">
+
+    <div class="side-label">ابزارها</div>
+    <nav class="sidebar-nav">
         <button class="nav-item" data-page="print">
             <i class="fas fa-print"></i>
             <span>پرینت JSON</span>
         </button>
-        <hr class="divider">
-        <div class="side-label">حافظه</div>
         <button class="nav-item" data-page="export-backup">
             <i class="fas fa-download"></i>
             <span>خروجی پشتیبان</span>
@@ -731,37 +764,31 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 
 <script>
 /* =========================================================
-   ZI — با ذخیره‌سازی localStorage
+   ZI — ساده‌سازی شده، آمار در سایدبار
 ========================================================= */
 
 const STORAGE_KEY = "ZI_WARDROBE_V1";
-
-/* ---------------- Theme (also saved) ---------------- */
 const THEME_KEY = "ZI_THEME_V1";
-const themeBtn = document.getElementById("themeBtn");
 
+/* ---------------- Theme ---------------- */
+const themeBtn = document.getElementById("themeBtn");
 function applyTheme(theme){
     document.documentElement.setAttribute("data-theme", theme);
     try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
 }
-
 themeBtn.onclick = ()=>{
     const cur = document.documentElement.getAttribute("data-theme");
     applyTheme(cur === "dark" ? "light" : "dark");
 };
-
-/* بازیابی تم ذخیره‌شده */
 (function restoreTheme(){
     try{
         const saved = localStorage.getItem(THEME_KEY);
-        if(saved === "light" || saved === "dark"){
-            document.documentElement.setAttribute("data-theme", saved);
-        }
+        if(saved === "light" || saved === "dark") applyTheme(saved);
     }catch(e){}
 })();
 
 /* =========================================================
-   لیست لباس‌ها — اسم و کد و مشخصات دست‌نویس
+   لیست لباس‌ها
 ========================================================= */
 const RAW_ITEMS = [
     { code:"BLI000",    name:"شلوار کتان مشکی",       type:"شلوار بیرونی", material:"کتان",     color:"مشکی"    },
@@ -771,28 +798,25 @@ const RAW_ITEMS = [
     { code:"PULN003",   name:"پلیور سبز",                type:"پلیور",        material:"نخی",      color:"سبز"     },
     { code:"PUCO000",   name:"پلیور مشکی",              type:"پلیور",        material:"پنبه",     color:"مشکی"    },
     { code:"RLN000",    name:"شلوار مشکی",         type:"شلوار راحتی",  material:"نخی",      color:"مشکی"    },
-    { code:"RQS000",    name:"شلوار قواصی ",       type:"شلوار راحتی",  material:"قواصی",    color:"مشکی"    },
+    { code:"RQS000",    name:"شلوار قواصی",       type:"شلوار راحتی",  material:"قواصی",    color:"مشکی"    },
     { code:"SHALN012",  name:"شرت سرمه‌ای",              type:"شرت",          material:"نخی",      color:"سرمه‌ای" },
     { code:"SHLN012",   name:"پیراهن سرمه‌ای",           type:"پیراهن",       material:"نخی",      color:"سرمه‌ای" },
     { code:"HDSU000",   name:"هودی مشکی",              type:"هودی",         material:"سوئیت",    color:"مشکی"    },
     { code:"BLEE000",   name:"لی مشکی",         type:"شلوار بیرونی", material:"لی",       color:"مشکی"    },
     { code:"HDDS008",   name:"هودی خاکستری",            type:"هودی",         material:"دورس",     color:"خاکستری" },
     { code:"RLN000-2",  name:"شلوار جافی",   type:"شلوار راحتی",  material:"نخی",      color:"مشکی"    },
-    { code:"SHALE000",  name:"شرت مشکی ",                 type:"شرت",          material:"چرم",      color:"مشکی"    },
+    { code:"SHALE000",  name:"شرت چرمی",                 type:"شرت",          material:"چرم",      color:"مشکی"    },
     { code:"SHSPL000",  name:"شلوارک مشکی",          type:"شلوارک",       material:"پلاستیک",  color:"مشکی"    },
     { code:"TSTO000",   name:"تیشرت مشکی",             type:"تیشرت",        material:"تریکو",    color:"مشکی"    },
     { code:"TSTO012",   name:"تیشرت سرمه‌ای",          type:"تیشرت",        material:"تریکو",    color:"سرمه‌ای" },
     { code:"SHSPL012",  name:"شلوارک سرمه‌ای",       type:"شلوارک",       material:"پلاستیک",  color:"سرمه‌ای" },
     { code:"TSTO004",   name:"تیشرت آبی",              type:"تیشرت",        material:"تریکو",    color:"آبی"     },
-    { code:"shoLE000",  name:"کفش چرم ",                 type:"کفش",          material:"چرم",      color:"مشکی"    },
+    { code:"shoLE000",  name:"کفش چرم",                 type:"کفش",          material:"چرم",      color:"مشکی"    },
     { code:"FCO006",    name:"حوله بنفش",               type:"حوله",         material:"پنبه",     color:"بنفش"    },
     { code:"TSTO000-2", name:"تیشرت سیاه",       type:"تیشرت",        material:"تریکو",    color:"مشکی"    },
     { code:"TSTO003",   name:"تیشرت سبز",        type:"تیشرت",        material:"تریکو",    color:"سبز"     }
 ];
 
-/* =========================================================
-   ساخت آبجکت پیش‌فرض یک آیتم (بدون وضعیت ذخیره‌شده)
-========================================================= */
 function defaultItem(raw){
     return {
         code: raw.code,
@@ -811,9 +835,6 @@ function defaultItem(raw){
     };
 }
 
-/* =========================================================
-   بارگذاری از localStorage + ادغام با RAW_ITEMS
-========================================================= */
 function loadFromStorage(){
     let saved = {};
     try{
@@ -821,27 +842,21 @@ function loadFromStorage(){
         if(raw){
             const parsed = JSON.parse(raw);
             if(Array.isArray(parsed)){
-                /* آرایه‌ی ذخیره‌شده را به دیکشنری با کلید code تبدیل کن */
-                parsed.forEach(x=>{
-                    if(x && x.code) saved[x.code] = x;
-                });
+                parsed.forEach(x=>{ if(x && x.code) saved[x.code] = x; });
             }
         }
     }catch(e){}
 
-    return RAW_ITEMS.map((raw, index)=>{
+    return RAW_ITEMS.map(raw=>{
         const base = defaultItem(raw);
         const s = saved[raw.code];
         if(!s) return base;
-
-        /* ادغام: اطلاعات پایه از RAW_ITEMS، وضعیت از ذخیره */
         return {
             code: base.code,
             name: base.name,
             type: base.type,
             material: base.material,
             color: base.color,
-            /* از ذخیره */
             master: s.master || "neutral",
             reason: s.reason || "",
             operations: Object.assign({}, base.operations, s.operations || {}),
@@ -851,49 +866,20 @@ function loadFromStorage(){
     });
 }
 
-/* =========================================================
-   ذخیره در localStorage
-========================================================= */
 function saveToStorage(){
     try{
         localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-        flashSaveDot();
-    }catch(e){
-        console.warn("ZI: storage error", e);
-        toastMsg("خطا در ذخیره‌سازی");
-    }
+    }catch(e){ toastMsg("خطا در ذخیره‌سازی"); }
 }
 
-/* ---------------- نشانگر ذخیره ---------------- */
-let flashTimer = null;
-function flashSaveDot(){
-    const dot = document.getElementById("saveDot");
-    if(!dot) return;
-    dot.classList.remove("flash");
-    void dot.offsetWidth; /* reflow برای restart انیمیشن */
-    dot.classList.add("flash");
-    clearTimeout(flashTimer);
-    flashTimer = setTimeout(()=>{
-        dot.style.opacity = ".6";
-        setTimeout(()=>{ dot.style.opacity = "0"; }, 400);
-    }, 800);
-}
-
-/* =========================================================
-   items — بارگذاری شده از ذخیره + پیش‌فرض
-========================================================= */
 let items = loadFromStorage();
 
 /* =========================================================
-   قوانین عملیات بر اساس نوع
+   قوانین عملیات
 ========================================================= */
 function opAllowed(item, op){
-    if(op === "ironed"){
-        return !(item.type === "کفش" || item.type === "حوله");
-    }
-    if(op === "polished"){
-        return item.type === "کفش";
-    }
+    if(op === "ironed") return !(item.type === "کفش" || item.type === "حوله");
+    if(op === "polished") return item.type === "کفش";
     return true;
 }
 
@@ -989,7 +975,6 @@ const SPECIAL_PATTERNS = {
     ]}
 };
 
-/* ---------------- Normalization ---------------- */
 function norm(v){
     return String(v||"")
         .toLowerCase()
@@ -1032,24 +1017,18 @@ function detectActions(text){
 
     for(const key of ["continuous","disconnected","neutral","archive","unarchive"]){
         const m = bestMatch(normText, tokensArr, SPECIAL_PATTERNS[key].patterns);
-        if(m.score > 0){
-            results.push({ type:key, score:m.score + SPECIAL_PATTERNS[key].weight });
-        }
+        if(m.score > 0) results.push({ type:key, score:m.score + SPECIAL_PATTERNS[key].weight });
     }
 
     const reasons = [];
     for(const key of ["dirty","damaged","lost","torn"]){
         const m = bestMatch(normText, tokensArr, SPECIAL_PATTERNS[key].patterns);
-        if(m.score > 0){
-            reasons.push({ reason:key, score:m.score + SPECIAL_PATTERNS[key].weight });
-        }
+        if(m.score > 0) reasons.push({ reason:key, score:m.score + SPECIAL_PATTERNS[key].weight });
     }
 
     for(const key of Object.keys(ACTION_PATTERNS)){
         const m = bestMatch(normText, tokensArr, ACTION_PATTERNS[key].patterns);
-        if(m.score > 0){
-            results.push({ type:key, score:m.score + ACTION_PATTERNS[key].weight });
-        }
+        if(m.score > 0) results.push({ type:key, score:m.score + ACTION_PATTERNS[key].weight });
     }
 
     const contHit = results.find(r=>r.type === "continuous");
@@ -1096,49 +1075,44 @@ function setContinuous(item){
     item.reason = "";
     item.archived = false;
     Object.keys(item.operations).forEach(k=>{ item.operations[k] = false; });
-    item.updatedAt = new Date().toLocaleString("fa-IR");
+    item.updatedAt = new Date().toISOString();
 }
 function setNeutral(item){
     item.master = "neutral";
     item.reason = "";
     item.archived = false;
-    item.updatedAt = new Date().toLocaleString("fa-IR");
+    item.updatedAt = new Date().toISOString();
 }
 function setDisconnected(item, reason){
     item.master = "disconnected";
     item.reason = reason || "صلاحیت استفاده ندارد";
     Object.keys(item.operations).forEach(k=>{ item.operations[k] = false; });
-    item.updatedAt = new Date().toLocaleString("fa-IR");
+    item.updatedAt = new Date().toISOString();
 }
 function setArchived(item){
     item.archived = true;
-    item.updatedAt = new Date().toLocaleString("fa-IR");
+    item.updatedAt = new Date().toISOString();
 }
 function setUnarchived(item){
     item.archived = false;
     item.master = "neutral";
     item.reason = "";
-    item.updatedAt = new Date().toLocaleString("fa-IR");
+    item.updatedAt = new Date().toISOString();
 }
 
-/* ---------------- Cycle completeness ---------------- */
 function getRequiredOps(item){
     if(item.type === "کفش") return ["washed","polished","placed"];
     if(item.type === "حوله") return ["washed","placed"];
     return ["washed","ironed","placed"];
 }
 function checkCycleComplete(item){
-    const required = getRequiredOps(item);
-    return required.every(op => item.operations[op] === true);
+    return getRequiredOps(item).every(op => item.operations[op] === true);
 }
 
-/* ---------------- Apply ---------------- */
 function applyMultiple(item, actions){
     if(!actions || !actions.length) return;
-
     for(const a of actions){
         const t = a.type;
-
         if(t === "continuous"){ setContinuous(item); return; }
         if(t === "neutral"){ setNeutral(item); return; }
         if(t === "archive"){ setArchived(item); return; }
@@ -1149,18 +1123,17 @@ function applyMultiple(item, actions){
             item.reason = "";
             if(item.master === "disconnected") item.master = "neutral";
             item.operations.washed = true;
-            item.updatedAt = new Date().toLocaleString("fa-IR");
+            item.updatedAt = new Date().toISOString();
             continue;
         }
 
         if(!opAllowed(item, t)) continue;
-
         if(item.operations[t] !== undefined) item.operations[t] = true;
         if(t === "repaired"){
             item.reason = "";
             if(item.master === "disconnected") item.master = "neutral";
         }
-        item.updatedAt = new Date().toLocaleString("fa-IR");
+        item.updatedAt = new Date().toISOString();
     }
 
     if(item.master !== "disconnected" && checkCycleComplete(item)){
@@ -1170,7 +1143,6 @@ function applyMultiple(item, actions){
     }
 }
 
-/* ---------------- Find items ---------------- */
 function findItems(command){
     const text = norm(command);
     const byCode = items.filter(i => text.includes(norm(i.code)));
@@ -1207,7 +1179,7 @@ function executeCommand(cmd){
     }
 
     applyMultiple(found[0], actions);
-    saveToStorage();           /* ← ذخیره در مرورگر */
+    saveToStorage();
     renderResults();
     showResultsView();
     updateInfo();
@@ -1224,25 +1196,12 @@ function showResultsView(){
     document.getElementById("backWrap").classList.add("visible");
 }
 
-function masterText(item){
-    if(item.archived) return "بایگانی";
-    if(item.master === "continuous") return "پیوسته";
-    if(item.master === "disconnected") return "گسسته";
-    return "خنثی";
-}
-function masterHint(item){
-    if(item.archived) return "خارج از چرخه";
-    if(item.master === "continuous") return "آماده‌ی استفاده";
-    if(item.master === "disconnected") return "صلاحیت استفاده ندارد";
-    return "در چرخه، کامل نیست";
-}
 function escapeHtml(s){
     return String(s||"")
         .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;");
 }
 
-/* ---------------- Ops ---------------- */
 const OPS = [
     {key:"washed",   label:"شسته",       icon:"fa-water"},
     {key:"ironed",   label:"اتو",        icon:"fa-fire"},
@@ -1258,16 +1217,16 @@ let currentFilter = "all";
 let lastQuery = "";
 let lastResults = null;
 
-/* ---------------- Filters ---------------- */
 const FILTERS = [
     {id:'all',          label:'همه',        icon:'fa-tag'},
     {id:'continuous',   label:'پیوسته',     icon:'fa-circle',           color:'continuous'},
     {id:'neutral',      label:'خنثی',       icon:'fa-circle-half-stroke',color:'neutral'},
     {id:'disconnected', label:'گسسته',      icon:'fa-circle-exclamation',color:'disconnected'},
+    {id:'last',         label:'آخرین',      icon:'fa-clock-rotate-left'},
     {id:'clothes',      label:'لباس',       icon:'fa-shirt'},
     {id:'shoes',        label:'کفش',        icon:'fa-shoe-prints'},
     {id:'towels',       label:'حوله',       icon:'fa-scroll'},
-    {id:'archive',      label:'بایگانی',    icon:'fa-box-archive'}
+    {id:'archive',      label:'بایگانی',    icon:'fa-box-archive',      color:'archive'}
 ];
 
 function renderFilterGrid(){
@@ -1278,6 +1237,7 @@ function renderFilterGrid(){
         else if(f.id === 'continuous') count = items.filter(i=>!i.archived && i.master === 'continuous').length;
         else if(f.id === 'neutral') count = items.filter(i=>!i.archived && i.master === 'neutral').length;
         else if(f.id === 'disconnected') count = items.filter(i=>!i.archived && i.master === 'disconnected').length;
+        else if(f.id === 'last') count = items.filter(i=>!i.archived && i.updatedAt).length;
         else if(f.id === 'clothes') count = items.filter(i=>!i.archived && i.type !== 'کفش' && i.type !== 'حوله').length;
         else if(f.id === 'shoes') count = items.filter(i=>!i.archived && i.type === 'کفش').length;
         else if(f.id === 'towels') count = items.filter(i=>!i.archived && i.type === 'حوله').length;
@@ -1296,25 +1256,38 @@ function renderFilterGrid(){
 
     grid.querySelectorAll('.filter-chip').forEach(chip=>{
         chip.onclick = ()=>{
-            currentFilter = chip.dataset.f;
-            const badge = document.getElementById("filterBadge");
-            if(currentFilter === 'all') badge.style.display = 'none';
-            else { badge.style.display = 'flex'; badge.textContent = '1'; }
-            renderFilterGrid();
-            renderResults();
-            showResultsView();
+            setCurrentFilter(chip.dataset.f);
             document.getElementById("filterDropdown").classList.remove("open");
         };
     });
 }
 
-/* ---------------- Render results ---------------- */
+function setCurrentFilter(f){
+    currentFilter = f;
+    const badge = document.getElementById("filterBadge");
+    if(f === 'all') badge.style.display = 'none';
+    else { badge.style.display = 'flex'; badge.textContent = '1'; }
+
+    /* sync sidebar active */
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(i=>{
+        if(i.dataset.page) i.classList.toggle('active', i.dataset.page === f);
+    });
+
+    renderFilterGrid();
+    renderResults();
+    showResultsView();
+}
+
 function renderResults(){
     let list = items.slice();
 
     if(currentFilter === "archive"){
         list = list.filter(i=>i.archived);
-    }else{
+    } else if(currentFilter === "last"){
+        list = list
+            .filter(i=>!i.archived && i.updatedAt)
+            .sort((a,b)=> new Date(b.updatedAt) - new Date(a.updatedAt));
+    } else {
         list = list.filter(i=>!i.archived);
         if(currentFilter === "continuous") list = list.filter(i=>i.master === "continuous");
         if(currentFilter === "neutral") list = list.filter(i=>i.master === "neutral");
@@ -1358,7 +1331,6 @@ function renderResults(){
     document.getElementById("cardsContainer").innerHTML = list.map(renderCard).join("");
 }
 
-/* ---------------- Render card ---------------- */
 function renderCard(item){
     const stateClass = item.archived ? "archived" : item.master;
     const required = getRequiredOps(item);
@@ -1374,31 +1346,28 @@ function renderCard(item){
         const on = item.operations[o.key];
         const cls = !allowed ? "na" : (on ? "on" : "");
         const ic = !allowed ? "fa-ban" : (on ? "fa-check" : o.icon);
-        return `<span class="op ${cls}">
-                    <i class="fas ${ic}"></i>
-                    ${o.label}
-                </span>`;
+        return `<span class="op ${cls}"><i class="fas ${ic}"></i>${o.label}</span>`;
     }).join("");
 
     let stateLabel, stateHint, stateIcon;
     if(item.archived){
         stateLabel = "بایگانی"; stateHint = "خارج از چرخه"; stateIcon = "fa-box-archive";
-    }else if(item.master === "continuous"){
+    } else if(item.master === "continuous"){
         stateLabel = "پیوسته"; stateHint = "آماده‌ی استفاده"; stateIcon = "fa-circle-check";
-    }else if(item.master === "disconnected"){
+    } else if(item.master === "disconnected"){
         stateLabel = "گسسته"; stateHint = item.reason || "صلاحیت استفاده ندارد"; stateIcon = "fa-circle-exclamation";
-    }else{
+    } else {
         stateLabel = "خنثی"; stateHint = "در چرخه، کامل نیست"; stateIcon = "fa-circle-half-stroke";
     }
 
     let quick = "";
     if(item.archived){
         quick = `<div class="quick">
-            <button onclick="quickUnarchive('${item.code}')">
+            <button class="gold" onclick="quickUnarchive('${item.code}')">
                 <i class="fas fa-rotate-left"></i> بازگرداندن از بایگانی
             </button>
         </div>`;
-    }else{
+    } else {
         quick = `<div class="quick">
             <button class="cont" onclick="quickContinuous('${item.code}')">
                 <i class="fas fa-circle-check"></i> پیوسته
@@ -1409,10 +1378,18 @@ function renderCard(item){
             <button class="disc" onclick="quickDisconnect('${item.code}')">
                 <i class="fas fa-circle-exclamation"></i> گسسته
             </button>
-            <button onclick="quickArchive('${item.code}')">
+            <button class="gold" onclick="quickArchive('${item.code}')">
                 <i class="fas fa-box-archive"></i> بایگانی
             </button>
         </div>`;
+    }
+
+    let timeStr = "";
+    if(item.updatedAt){
+        try{
+            const d = new Date(item.updatedAt);
+            timeStr = d.toLocaleString("fa-IR");
+        }catch(e){ timeStr = item.updatedAt; }
     }
 
     return `
@@ -1424,7 +1401,6 @@ function renderCard(item){
                 </div>
                 <span class="card-type">${escapeHtml(item.type)}</span>
             </div>
-
             <div class="card-meta">
                 <div class="m-item">
                     <span class="m-lbl">جنس</span>
@@ -1435,63 +1411,54 @@ function renderCard(item){
                     <span class="m-val">${escapeHtml(item.color || "—")}</span>
                 </div>
             </div>
-
             <div class="card-status ${stateClass}">
                 <span class="dot"></span>
                 <i class="fas ${stateIcon}"></i>
                 <span>${stateLabel}</span>
                 <span class="hint">${escapeHtml(stateHint)}</span>
             </div>
-
             <div class="cycle"><div class="cycle-fill" style="width:${pct}%"></div></div>
             <div class="cycle-label">
                 <span>چرخه</span>
                 <span>${doneRequired} از ${required.length} عملیات لازم</span>
             </div>
-
             <div class="ops">${opsHtml}</div>
             ${quick}
-            ${item.updatedAt ? `<div class="card-time">آخرین تغییر: ${escapeHtml(item.updatedAt)}</div>` : ""}
+            ${timeStr ? `<div class="card-time">آخرین تغییر: ${escapeHtml(timeStr)}</div>` : ""}
         </article>
     `;
 }
 
 /* ---------------- Quick actions ---------------- */
-/* نکته: حالا با code کار می‌کنند، نه با id رندوم — پایدار و قابل ذخیره */
 function findItem(code){ return items.find(x=>x.code === code); }
 
 function quickContinuous(code){
     const item = findItem(code); if(!item) return;
-    setContinuous(item);
-    saveToStorage();           /* ← ذخیره */
+    setContinuous(item); saveToStorage();
     renderResults(); updateInfo();
     toastMsg("✓ " + item.name + " آماده‌ی استفاده");
 }
 function quickNeutral(code){
     const item = findItem(code); if(!item) return;
-    setNeutral(item);
-    saveToStorage();
+    setNeutral(item); saveToStorage();
     renderResults(); updateInfo();
     toastMsg("○ " + item.name + " خنثی");
 }
 function quickDisconnect(code){
     const item = findItem(code); if(!item) return;
-    setDisconnected(item, "صلاحیت استفاده ندارد");
-    saveToStorage();
+    setDisconnected(item, "صلاحیت استفاده ندارد"); saveToStorage();
     renderResults(); updateInfo();
     toastMsg("◌ " + item.name + " گسسته");
 }
 function quickArchive(code){
     const item = findItem(code); if(!item) return;
-    setArchived(item);
-    saveToStorage();
+    setArchived(item); saveToStorage();
     renderResults(); updateInfo();
     toastMsg("⌁ " + item.name + " بایگانی شد");
 }
 function quickUnarchive(code){
     const item = findItem(code); if(!item) return;
-    setUnarchived(item);
-    saveToStorage();
+    setUnarchived(item); saveToStorage();
     renderResults(); updateInfo();
     toastMsg("↺ " + item.name + " از بایگانی خارج شد");
 }
@@ -1524,7 +1491,7 @@ commandInput.addEventListener("input", ()=>{
     if(lastQuery.trim()){
         renderResults();
         showResultsView();
-    }else{
+    } else {
         document.getElementById("results").classList.remove("visible");
         document.getElementById("backWrap").classList.remove("visible");
     }
@@ -1605,6 +1572,10 @@ const closeSidebar = document.getElementById("closeSidebar");
 function openSidebar(){
     sidebar.classList.add("open");
     sidebarOverlay.classList.add("active");
+    /* sync active based on current filter */
+    document.querySelectorAll('.sidebar-nav .nav-item').forEach(i=>{
+        if(i.dataset.page) i.classList.toggle('active', i.dataset.page === currentFilter);
+    });
 }
 function closeSidebarPanel(){
     sidebar.classList.remove("open");
@@ -1620,8 +1591,6 @@ document.addEventListener("keydown", e=>{
 document.querySelectorAll('.sidebar-nav .nav-item').forEach(item=>{
     item.onclick = ()=>{
         const page = item.dataset.page;
-        document.querySelectorAll('.sidebar-nav .nav-item').forEach(i=>i.classList.remove('active'));
-        item.classList.add('active');
 
         if(page === 'home'){
             currentFilter = 'all'; lastQuery = ''; lastResults = null;
@@ -1638,12 +1607,11 @@ document.querySelectorAll('.sidebar-nav .nav-item').forEach(item=>{
             document.getElementById("filterBadge").style.display = 'none';
             closeSidebarPanel(); return;
         }
-        if(page === 'archive'){
-            currentFilter = 'archive';
-            renderFilterGrid(); renderResults(); showResultsView();
-            const badge = document.getElementById("filterBadge");
-            badge.style.display = 'flex'; badge.textContent = '1';
-            closeSidebarPanel(); return;
+        if(page === 'continuous' || page === 'neutral' || page === 'disconnected'
+           || page === 'archive' || page === 'last'){
+            setCurrentFilter(page);
+            closeSidebarPanel();
+            return;
         }
         if(page === 'print'){ openJson(); closeSidebarPanel(); return; }
         if(page === 'export-backup'){ exportBackup(); closeSidebarPanel(); return; }
@@ -1665,9 +1633,7 @@ document.getElementById("backBtn").onclick = ()=>{
     document.querySelector('.sidebar-nav .nav-item[data-page="home"]').classList.add('active');
 };
 
-/* =========================================================
-   پشتیبان‌گیری و بازیابی
-========================================================= */
+/* ---------------- Backup ---------------- */
 function exportBackup(){
     const data = {
         version: 1,
@@ -1688,8 +1654,7 @@ function exportBackup(){
 
 function importBackup(){
     const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = '.json,application/json';
+    input.type = 'file'; input.accept = '.json,application/json';
     input.onchange = e=>{
         const file = e.target.files[0];
         if(!file) return;
@@ -1697,50 +1662,31 @@ function importBackup(){
         reader.onload = ev=>{
             try{
                 const parsed = JSON.parse(ev.target.result);
-                /* پشتیبانی از دو فرمت: مستقیم آرایه، یا آبجکت با .items */
                 let newItems = null;
-                if(Array.isArray(parsed)){
-                    newItems = parsed;
-                }else if(parsed && Array.isArray(parsed.items)){
-                    newItems = parsed.items;
-                }
+                if(Array.isArray(parsed)) newItems = parsed;
+                else if(parsed && Array.isArray(parsed.items)) newItems = parsed.items;
+                if(!newItems){ toastMsg('فایل معتبر نیست'); return; }
 
-                if(!newItems){
-                    toastMsg('فایل معتبر نیست');
-                    return;
-                }
-
-                /* ادغام: فقط کدهایی که در RAW_ITEMS هستند حفظ می‌شوند */
                 const dict = {};
-                newItems.forEach(x=>{
-                    if(x && x.code) dict[x.code] = x;
-                });
+                newItems.forEach(x=>{ if(x && x.code) dict[x.code] = x; });
 
                 items = RAW_ITEMS.map(raw=>{
                     const base = defaultItem(raw);
                     const s = dict[raw.code];
                     if(!s) return base;
                     return {
-                        code: base.code,
-                        name: base.name,
-                        type: base.type,
-                        material: base.material,
-                        color: base.color,
-                        master: s.master || "neutral",
-                        reason: s.reason || "",
+                        code: base.code, name: base.name,
+                        type: base.type, material: base.material, color: base.color,
+                        master: s.master || "neutral", reason: s.reason || "",
                         operations: Object.assign({}, base.operations, s.operations || {}),
-                        archived: !!s.archived,
-                        updatedAt: s.updatedAt || null
+                        archived: !!s.archived, updatedAt: s.updatedAt || null
                     };
                 });
 
                 saveToStorage();
-                renderResults();
-                updateInfo();
+                renderResults(); updateInfo(); renderFilterGrid();
                 toastMsg('پشتیبان بازیابی شد');
-            }catch(err){
-                toastMsg('خطا در خواندن فایل');
-            }
+            }catch(err){ toastMsg('خطا در خواندن فایل'); }
         };
         reader.readAsText(file);
     };
@@ -1749,20 +1695,16 @@ function importBackup(){
 
 function resetStorage(){
     if(!confirm('همه‌ی وضعیت‌های ذخیره‌شده پاک شوند؟')) return;
-    try{
-        localStorage.removeItem(STORAGE_KEY);
-    }catch(e){}
-    /* بازگرداندن به وضعیت پیش‌فرض */
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
     items = RAW_ITEMS.map(defaultItem);
-    renderResults();
-    updateInfo();
-    renderFilterGrid();
+    currentFilter = 'all';
+    renderResults(); updateInfo(); renderFilterGrid();
+    document.getElementById("results").classList.remove("visible");
+    document.getElementById("backWrap").classList.remove("visible");
     toastMsg('حافظه پاک شد');
 }
 
-/* =========================================================
-   JSON
-========================================================= */
+/* ---------------- JSON ---------------- */
 const jsonOverlay = document.getElementById("jsonOverlay");
 const jsonContent = document.getElementById("jsonContent");
 
@@ -1796,9 +1738,7 @@ document.getElementById("downloadJson").onclick = ()=>{
     toastMsg('دانلود شد');
 };
 
-/* =========================================================
-   Toast
-========================================================= */
+/* ---------------- Toast ---------------- */
 let toastTimer = null;
 function toastMsg(msg){
     const t = document.getElementById("toast");
@@ -1808,9 +1748,7 @@ function toastMsg(msg){
     toastTimer = setTimeout(()=> t.classList.remove("show"), 2400);
 }
 
-/* =========================================================
-   Stats
-========================================================= */
+/* ---------------- Stats ---------------- */
 function updateInfo(){
     const cont = items.filter(i=>!i.archived && i.master === 'continuous').length;
     const neut = items.filter(i=>!i.archived && i.master === 'neutral').length;
@@ -1823,15 +1761,17 @@ function updateInfo(){
     document.getElementById("sArch").textContent = arch;
 
     document.getElementById("badgeAll").textContent = cont + neut + disc;
+    document.getElementById("badgeCont").textContent = cont;
+    document.getElementById("badgeNeut").textContent = neut;
+    document.getElementById("badgeDisc").textContent = disc;
     document.getElementById("badgeArch").textContent = arch;
 
+    /* info line ساده */
     document.getElementById("info").textContent =
-        `${cont} پیوسته • ${neut} خنثی • ${disc} گسسته • ${arch} بایگانی • ذخیره خودکار ✓`;
+        `${cont + neut + disc} مورد فعال • ${arch} بایگانی`;
 }
 
-/* =========================================================
-   Init
-========================================================= */
+/* ---------------- Init ---------------- */
 renderFilterGrid();
 updateInfo();
 </script>
