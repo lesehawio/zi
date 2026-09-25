@@ -7,9 +7,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* =========================================================
-   ZI — MONOCHROME + GREEN / GRAY / RED states
-========================================================= */
 :root{
     --bg:#ffffff;
     --bg-2:#f7f7f7;
@@ -90,9 +87,7 @@ body{
 button,input,select{font-family:inherit;color:inherit}
 button{cursor:pointer;border:0;background:none}
 
-/* =========================================================
-   LOGO BIG MOTION — لوگوی بزرگ وسط، با انیمیشن messy
-========================================================= */
+/* ===== LOGO BIG MOTION ===== */
 .logo-big-wrap{
     width:100%;
     max-width:680px;
@@ -109,11 +104,7 @@ button{cursor:pointer;border:0;background:none}
     flex-shrink:0;
     pointer-events:none;
 }
-.logo-motion svg{
-    width:100%;
-    height:100%;
-    overflow:visible;
-}
+.logo-motion svg{width:100%;height:100%;overflow:visible}
 .logo-motion .piece{
     fill:var(--ink);
     transform-box:fill-box;
@@ -172,7 +163,7 @@ button{cursor:pointer;border:0;background:none}
     100%{opacity:0;transform:translate(70px,65px) rotate(-65deg) scale(.25)}
 }
 
-/* ============ HEADER ============ */
+/* ===== HEADER ===== */
 .header{
     width:100%;max-width:680px;
     display:flex;align-items:center;justify-content:space-between;
@@ -197,7 +188,7 @@ button{cursor:pointer;border:0;background:none}
 html[data-theme="dark"] .theme-btn .icon-sun{display:block}
 html[data-theme="dark"] .theme-btn .icon-moon{display:none}
 
-/* ============ COMMAND BOX ============ */
+/* ===== COMMAND ===== */
 .command-wrap{width:100%;max-width:680px;position:relative}
 .command-box{
     background:var(--panel);border:1px solid var(--line);border-radius:16px;
@@ -272,7 +263,7 @@ html[data-theme="dark"] .theme-btn .icon-moon{display:none}
 .filter-chip[data-f="neutral"] .dotc{background:var(--state-neut)}
 .filter-chip[data-f="disconnected"] .dotc{background:var(--state-disc)}
 
-/* ============ RESULTS ============ */
+/* ===== RESULTS ===== */
 .results{width:100%;max-width:680px;margin-top:14px;display:none}
 .results.visible{display:block}
 .results .count{
@@ -280,7 +271,7 @@ html[data-theme="dark"] .theme-btn .icon-moon{display:none}
 }
 .cards{display:flex;flex-direction:column;gap:10px}
 
-/* ============ CARD ============ */
+/* ===== CARD ===== */
 .card{
     background:var(--panel);
     border:1px solid var(--line);
@@ -421,7 +412,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     text-align:center;font-weight:400;letter-spacing:.4px;
 }
 
-/* ============ SIDEBAR ============ */
+/* ===== SIDEBAR ===== */
 .sidebar{
     position:fixed;top:0;right:-100%;width:280px;max-width:82vw;height:100%;
     background:var(--bg-2);border-left:1px solid var(--line);z-index:1000;
@@ -483,7 +474,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     min-width:20px;text-align:center;
 }
 
-/* ============ JSON ============ */
+/* ===== JSON ===== */
 .json-overlay{
     position:fixed;inset:0;background:var(--overlay);
     backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
@@ -520,7 +511,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 .json-actions .download-json{background:var(--ink);color:var(--accent-ink);border-color:var(--ink)}
 .json-actions .download-json:hover{opacity:.85}
 
-/* ============ TOAST ============ */
+/* ===== TOAST ===== */
 .toast{
     position:fixed;bottom:24px;left:50%;
     transform:translateX(-50%) translateY(20px);
@@ -531,7 +522,6 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 }
 .toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
 
-/* ============ MOBILE ============ */
 @media(max-width:600px){
     body{padding:0 12px 18px}
     .header{padding:10px 0;margin-bottom:18px}
@@ -550,7 +540,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- ===== HEADER ===== -->
 <header class="header">
     <div class="header-left">
         <button class="menu-btn" id="menuBtn" aria-label="منو">
@@ -565,7 +555,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     </div>
 </header>
 
-<!-- ================= LOGO BIG MOTION ================= -->
+<!-- ===== LOGO BIG MOTION ===== -->
 <div class="logo-big-wrap">
     <div class="logo-motion" aria-hidden="true">
         <svg viewBox="0 0 220 320" xmlns="http://www.w3.org/2000/svg">
@@ -583,12 +573,12 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     </div>
 </div>
 
-<!-- ================= COMMAND ================= -->
+<!-- ===== COMMAND ===== -->
 <div class="command-wrap">
     <div class="command-box">
         <i class="fas fa-terminal prefix"></i>
         <input type="text" id="command"
-               placeholder="مثلاً: پیراهن مشکی شسته شد"
+               placeholder="مثلاً: پیراهن سرمه‌ای شسته شد"
                autocomplete="off">
         <div class="actions">
             <button class="icon-btn filter-btn" id="filterBtn">
@@ -614,23 +604,23 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     </div>
 </div>
 
-<!-- ================= BACK ================= -->
+<!-- ===== BACK ===== -->
 <div class="back-wrap" id="backWrap">
     <button class="back-btn" id="backBtn">
         <i class="fas fa-arrow-right"></i> برگشت
     </button>
 </div>
 
-<!-- ================= RESULTS ================= -->
+<!-- ===== RESULTS ===== -->
 <div class="results" id="results">
     <span class="count" id="resultCount">۰ مورد</span>
     <div class="cards" id="cardsContainer"></div>
 </div>
 
-<!-- ================= INFO ================= -->
+<!-- ===== INFO ===== -->
 <div class="info" id="info">0 مورد</div>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- ===== SIDEBAR ===== -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <aside class="sidebar" id="sidebar">
     <div class="side-header">
@@ -693,7 +683,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     </nav>
 </aside>
 
-<!-- ================= JSON OVERLAY ================= -->
+<!-- ===== JSON OVERLAY ===== -->
 <div class="json-overlay" id="jsonOverlay">
     <div class="json-box">
         <div class="json-header">
@@ -714,7 +704,7 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     </div>
 </div>
 
-<!-- ================= TOAST ================= -->
+<!-- ===== TOAST ===== -->
 <div class="toast" id="toast">
     <i class="fas fa-check-circle"></i>
     <span id="toastText">آماده</span>
@@ -722,8 +712,8 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 
 <script>
 /* =========================================================
-   ZI — Offline (in-memory), سه وضعیت مادر
-   ========================================================= */
+   ZI — لیست دست‌نویس لباس‌ها
+========================================================= */
 
 /* ---------------- Theme ---------------- */
 const themeBtn = document.getElementById("themeBtn");
@@ -733,29 +723,56 @@ themeBtn.onclick = ()=>{
 };
 
 /* =========================================================
-   کد استاندارد ZI — نوع + جنس + رنگ
+   لیست لباس‌ها — اسم و کد و مشخصات دست‌نویس
 ========================================================= */
-const TYPES = {
-    "SH":"پیراهن","HD":"هودی","TS":"تیشرت","CP":"کاپشن","PL":"پالتو",
-    "R":"شلوار راحتی","B":"شلوار بیرونی","SHS":"شلوارک","SHA":"شرت",
-    "SW":"عرق‌گیر","BL":"بلوز","SS":"جوراب کوتاه","ST":"جوراب بلند",
-    "BG":"کیف","SHO":"کفش","F":"سایر"
-};
+const RAW_ITEMS = [
+    { code:"BLI000",    name:"شلوار کتان مشکی",       type:"شلوار بیرونی", material:"کتان",     color:"مشکی"    },
+    { code:"BLEE004",   name:"لی آبی",          type:"شلوار بیرونی", material:"لی",       color:"آبی"     },
+    { code:"SHALN003",  name:"شرت سبز",                  type:"شرت",          material:"نخی",      color:"سبز"     },
+    { code:"RLN003",    name:"شلوار سبز",          type:"شلوار راحتی",  material:"نخی",      color:"سبز"     },
+    { code:"PULN003",   name:"پلیور سبز",                type:"پلیور",        material:"نخی",      color:"سبز"     },
+    { code:"PUCO000",   name:"پلیور مشکی",              type:"پلیور",        material:"پنبه",     color:"مشکی"    },
+    { code:"RLN000",    name:"شلوار مشکی",         type:"شلوار راحتی",  material:"نخی",      color:"مشکی"    },
+    { code:"RQS000",    name:"شلوار قواصی ",       type:"شلوار راحتی",  material:"قواصی",    color:"مشکی"    },
+    { code:"SHALN012",  name:"شرت سرمه‌ای",              type:"شرت",          material:"نخی",      color:"سرمه‌ای" },
+    { code:"SHLN012",   name:"پیراهن سرمه‌ای",           type:"پیراهن",       material:"نخی",      color:"سرمه‌ای" },
+    { code:"HDSU000",   name:"هودی مشکی",              type:"هودی",         material:"سوئیت",    color:"مشکی"    },
+    { code:"BLEE000",   name:"لی مشکی",         type:"شلوار بیرونی", material:"لی",       color:"مشکی"    },
+    { code:"HDDS008",   name:"هودی خاکستری",            type:"هودی",         material:"دورس",     color:"خاکستری" },
+    { code:"RLN000-2",  name:"شلوار جافی",   type:"شلوار راحتی",  material:"نخی",      color:"مشکی"    },
+    { code:"SHALE000",  name:"شرت مشکی ",                 type:"شرت",          material:"چرم",      color:"مشکی"    },
+    { code:"SHSPL000",  name:"شلوارک مشکی",          type:"شلوارک",       material:"پلاستیک",  color:"مشکی"    },
+    { code:"TSTO000",   name:"تیشرت مشکی",             type:"تیشرت",        material:"تریکو",    color:"مشکی"    },
+    { code:"TSTO012",   name:"تیشرت سرمه‌ای",          type:"تیشرت",        material:"تریکو",    color:"سرمه‌ای" },
+    { code:"SHSPL012",  name:"شلوارک سرمه‌ای",       type:"شلوارک",       material:"پلاستیک",  color:"سرمه‌ای" },
+    { code:"TSTO004",   name:"تیشرت آبی",              type:"تیشرت",        material:"تریکو",    color:"آبی"     },
+    { code:"shoLE000",  name:"کفش چرم ",                 type:"کفش",          material:"چرم",      color:"مشکی"    },
+    { code:"FCO006",    name:"حوله بنفش",               type:"حوله",         material:"پنبه",     color:"بنفش"    },
+    { code:"TSTO000-2", name:"تیشرت سیاه",       type:"تیشرت",        material:"تریکو",    color:"مشکی"    },
+    { code:"TSTO003", name:"تیشرت سبز",        type:"تیشرت",        material:"تریکو",    color:"سبز"     }
+];
 
-const MATERIALS = {
-    "CO":"پنبه","LI":"کتان","SE":"ابریشم","WO":"پشم","WS":"ترمه",
-    "HE":"کنف","JU":"جوت","LE":"چرم","RA":"رامی","SI":"سیسال",
-    "WA":"آنگورا","WL":"لاما","WM":"موهر","WV":"پشم بکر","AC":"استات",
-    "EA":"الستان","NY":"نایلون","PA":"پلی آمید","QS":"قواصی",
-    "TR":"تیترون","LN":"نخی","LEE":"لی","PL":"پلاستیک","TO":"تریکو",
-    "BR":"برزنت","DS":"دورس"
-};
+/* ---------------- ساخت آیتم‌ها ---------------- */
+function buildItem(raw, index){
+    return {
+        id: "zi-" + index + "-" + Math.random().toString(36).slice(2,7),
+        code: raw.code,
+        name: raw.name,
+        type: raw.type,
+        material: raw.material,
+        color: raw.color,
+        master: "neutral",
+        reason: "",
+        operations:{
+            washed:false, ironed:false, placed:false, dried:false,
+            folded:false, polished:false, repaired:false, paired:false
+        },
+        archived: false,
+        updatedAt: null
+    };
+}
 
-const COLORS = {
-    "000":"مشکی","001":"سفید","002":"قرمز","003":"سبز","004":"آبی",
-    "005":"زرد","006":"بنفش","007":"نارنجی","008":"خاکستری",
-    "009":"قهوه‌ای","010":"صورتی","011":"رنگارنگ"
-};
+let items = RAW_ITEMS.map(buildItem);
 
 /* =========================================================
    قوانین عملیات بر اساس نوع
@@ -862,9 +879,7 @@ const SPECIAL_PATTERNS = {
     ]}
 };
 
-/* =========================================================
-   Normalization
-========================================================= */
+/* ---------------- Normalization ---------------- */
 function norm(v){
     return String(v||"")
         .toLowerCase()
@@ -885,7 +900,7 @@ function scorePhrase(normText, tokensArr, phrase){
     if(normText.includes(np)) return np.length * 2 + 6;
     const pt = np.split(" ").filter(Boolean);
     if(!pt.length) return 0;
-    const allIn = pt.every(p => tokensArr.some(t => t === p || t.startsWith(p) || p.startsWith(t)));
+    const allIn = pt.every(p => tokensArr.some(t => t === p || t.startsWith(p) || t.startsWith(t)));
     if(allIn) return np.length + 3;
     return 0;
 }
@@ -964,55 +979,6 @@ function reasonLabel(code){
     };
     return map[code] || code;
 }
-
-/* =========================================================
-   Original codes
-========================================================= */
-const ORIGINAL = [
-    "SHLN008","BLI000","HDDS008","SHLN004","SHLI003","SHLI004",
-    "SHLN000","SHKP008","RPL000","RLN000","RQS000","RLN003",
-    "TSTO000","SHSPL000","TSLI000","TSLI004","SHSCO011",
-    "SHSPL004","shoLE000","BGBR000","BGBR000","RCO008",
-    "SHALN009","SHALN002","SHALN002","SHALN004","SHSLN008",
-    "TSCO004","STEA000","SSEA000","SSEA009","STEA000",
-    "STEA000","SHSCO000","SHSPL004","TSTO008"
-];
-
-function decode(code){
-    let typeCode = "";
-    const sorted = Object.keys(TYPES).sort((a,b)=>b.length-a.length);
-    for(const t of sorted){
-        if(code.toUpperCase().startsWith(t)){ typeCode = t; break; }
-    }
-    const rest = code.slice(typeCode.length);
-    const match = rest.match(/(\d{3})$/);
-    let materialCode = "", colorCode = "";
-    if(match){ colorCode = match[1]; materialCode = rest.slice(0,-3); }
-    return { typeCode, materialCode, colorCode };
-}
-
-function makeItem(code,index){
-    const d = decode(code);
-    const type = TYPES[d.typeCode] || "سایر";
-    const material = MATERIALS[d.materialCode] || "";
-    const color = COLORS[d.colorCode] || "";
-    return {
-        id: "zi-" + index + "-" + Math.random().toString(36).slice(2,7),
-        code: code.toUpperCase(),
-        name: [type,color].filter(Boolean).join(" "),
-        type, material, color,
-        master: "neutral",
-        reason: "",
-        operations:{
-            washed:false, ironed:false, placed:false, dried:false,
-            folded:false, polished:false, repaired:false, paired:false
-        },
-        archived: false,
-        updatedAt: null
-    };
-}
-
-let items = ORIGINAL.map(makeItem);
 
 /* ---------------- Master transitions ---------------- */
 function setContinuous(item){
@@ -1201,7 +1167,7 @@ function renderFilterGrid(){
         else if(f.id === 'continuous') count = items.filter(i=>!i.archived && i.master === 'continuous').length;
         else if(f.id === 'neutral') count = items.filter(i=>!i.archived && i.master === 'neutral').length;
         else if(f.id === 'disconnected') count = items.filter(i=>!i.archived && i.master === 'disconnected').length;
-        else if(f.id === 'clothes') count = items.filter(i=>!i.archived && i.type === 'لباس').length;
+        else if(f.id === 'clothes') count = items.filter(i=>!i.archived && i.type !== 'کفش' && i.type !== 'حوله').length;
         else if(f.id === 'shoes') count = items.filter(i=>!i.archived && i.type === 'کفش').length;
         else if(f.id === 'towels') count = items.filter(i=>!i.archived && i.type === 'حوله').length;
         else if(f.id === 'archive') count = items.filter(i=>i.archived).length;
@@ -1242,7 +1208,7 @@ function renderResults(){
         if(currentFilter === "continuous") list = list.filter(i=>i.master === "continuous");
         if(currentFilter === "neutral") list = list.filter(i=>i.master === "neutral");
         if(currentFilter === "disconnected") list = list.filter(i=>i.master === "disconnected");
-        if(currentFilter === "clothes") list = list.filter(i=>i.type === "لباس");
+        if(currentFilter === "clothes") list = list.filter(i=>i.type !== "کفش" && i.type !== "حوله");
         if(currentFilter === "shoes") list = list.filter(i=>i.type === "کفش");
         if(currentFilter === "towels") list = list.filter(i=>i.type === "حوله");
     }
