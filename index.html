@@ -89,28 +89,16 @@ button{cursor:pointer;border:0;background:none}
 
 /* ===== LOGO BIG MOTION ===== */
 .logo-big-wrap{
-    width:100%;
-    max-width:680px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px 0 30px;
-    min-height:170px;
+    width:100%;max-width:680px;display:flex;justify-content:center;
+    align-items:center;padding:20px 0 30px;min-height:170px;
 }
 .logo-motion{
-    position:relative;
-    width:110px;
-    height:160px;
-    flex-shrink:0;
-    pointer-events:none;
+    position:relative;width:110px;height:160px;flex-shrink:0;pointer-events:none;
 }
 .logo-motion svg{width:100%;height:100%;overflow:visible}
 .logo-motion .piece{
-    fill:var(--ink);
-    transform-box:fill-box;
-    transform-origin:center;
-    animation-iteration-count:infinite;
-    animation-duration:7s;
+    fill:var(--ink);transform-box:fill-box;transform-origin:center;
+    animation-iteration-count:infinite;animation-duration:7s;
     animation-timing-function:cubic-bezier(.18,.89,.25,1);
 }
 .logo-motion .top-triangle{animation-name:messyTop}
@@ -473,6 +461,11 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     font-size:9px;font-weight:800;border-radius:20px;padding:2px 8px;
     min-width:20px;text-align:center;
 }
+.sidebar-nav .nav-item.danger i{color:var(--state-disc)}
+.sidebar-nav .nav-item.danger:hover{
+    background:var(--state-disc-soft);
+    color:var(--state-disc);
+}
 
 /* ===== JSON ===== */
 .json-overlay{
@@ -521,6 +514,18 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
     z-index:2000;display:flex;align-items:center;gap:8px;
 }
 .toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+
+/* ===== SAVE INDICATOR ===== */
+.save-dot{
+    width:7px;height:7px;border-radius:50%;background:var(--state-cont);
+    margin-right:auto;opacity:0;transition:opacity .3s;
+}
+.save-dot.flash{animation:flashDot .6s ease}
+@keyframes flashDot{
+    0%{opacity:0;transform:scale(.5)}
+    30%{opacity:1;transform:scale(1.4)}
+    100%{opacity:.6;transform:scale(1)}
+}
 
 @media(max-width:600px){
     body{padding:0 12px 18px}
@@ -680,6 +685,20 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
             <i class="fas fa-print"></i>
             <span>پرینت JSON</span>
         </button>
+        <hr class="divider">
+        <div class="side-label">حافظه</div>
+        <button class="nav-item" data-page="export-backup">
+            <i class="fas fa-download"></i>
+            <span>خروجی پشتیبان</span>
+        </button>
+        <button class="nav-item" data-page="import-backup">
+            <i class="fas fa-upload"></i>
+            <span>بازیابی از فایل</span>
+        </button>
+        <button class="nav-item danger" data-page="reset-storage">
+            <i class="fas fa-trash-can"></i>
+            <span>پاک کردن حافظه</span>
+        </button>
     </nav>
 </aside>
 
@@ -712,15 +731,34 @@ html[data-theme="dark"] .card.disconnected{background:rgba(239,68,68,.06)}
 
 <script>
 /* =========================================================
-   ZI — لیست دست‌نویس لباس‌ها
+   ZI — با ذخیره‌سازی localStorage
 ========================================================= */
 
-/* ---------------- Theme ---------------- */
+const STORAGE_KEY = "ZI_WARDROBE_V1";
+
+/* ---------------- Theme (also saved) ---------------- */
+const THEME_KEY = "ZI_THEME_V1";
 const themeBtn = document.getElementById("themeBtn");
+
+function applyTheme(theme){
+    document.documentElement.setAttribute("data-theme", theme);
+    try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+}
+
 themeBtn.onclick = ()=>{
     const cur = document.documentElement.getAttribute("data-theme");
-    document.documentElement.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+    applyTheme(cur === "dark" ? "light" : "dark");
 };
+
+/* بازیابی تم ذخیره‌شده */
+(function restoreTheme(){
+    try{
+        const saved = localStorage.getItem(THEME_KEY);
+        if(saved === "light" || saved === "dark"){
+            document.documentElement.setAttribute("data-theme", saved);
+        }
+    }catch(e){}
+})();
 
 /* =========================================================
    لیست لباس‌ها — اسم و کد و مشخصات دست‌نویس
@@ -749,13 +787,14 @@ const RAW_ITEMS = [
     { code:"shoLE000",  name:"کفش چرم ",                 type:"کفش",          material:"چرم",      color:"مشکی"    },
     { code:"FCO006",    name:"حوله بنفش",               type:"حوله",         material:"پنبه",     color:"بنفش"    },
     { code:"TSTO000-2", name:"تیشرت سیاه",       type:"تیشرت",        material:"تریکو",    color:"مشکی"    },
-    { code:"TSTO003", name:"تیشرت سبز",        type:"تیشرت",        material:"تریکو",    color:"سبز"     }
+    { code:"TSTO003",   name:"تیشرت سبز",        type:"تیشرت",        material:"تریکو",    color:"سبز"     }
 ];
 
-/* ---------------- ساخت آیتم‌ها ---------------- */
-function buildItem(raw, index){
+/* =========================================================
+   ساخت آبجکت پیش‌فرض یک آیتم (بدون وضعیت ذخیره‌شده)
+========================================================= */
+function defaultItem(raw){
     return {
-        id: "zi-" + index + "-" + Math.random().toString(36).slice(2,7),
         code: raw.code,
         name: raw.name,
         type: raw.type,
@@ -772,7 +811,78 @@ function buildItem(raw, index){
     };
 }
 
-let items = RAW_ITEMS.map(buildItem);
+/* =========================================================
+   بارگذاری از localStorage + ادغام با RAW_ITEMS
+========================================================= */
+function loadFromStorage(){
+    let saved = {};
+    try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if(raw){
+            const parsed = JSON.parse(raw);
+            if(Array.isArray(parsed)){
+                /* آرایه‌ی ذخیره‌شده را به دیکشنری با کلید code تبدیل کن */
+                parsed.forEach(x=>{
+                    if(x && x.code) saved[x.code] = x;
+                });
+            }
+        }
+    }catch(e){}
+
+    return RAW_ITEMS.map((raw, index)=>{
+        const base = defaultItem(raw);
+        const s = saved[raw.code];
+        if(!s) return base;
+
+        /* ادغام: اطلاعات پایه از RAW_ITEMS، وضعیت از ذخیره */
+        return {
+            code: base.code,
+            name: base.name,
+            type: base.type,
+            material: base.material,
+            color: base.color,
+            /* از ذخیره */
+            master: s.master || "neutral",
+            reason: s.reason || "",
+            operations: Object.assign({}, base.operations, s.operations || {}),
+            archived: !!s.archived,
+            updatedAt: s.updatedAt || null
+        };
+    });
+}
+
+/* =========================================================
+   ذخیره در localStorage
+========================================================= */
+function saveToStorage(){
+    try{
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        flashSaveDot();
+    }catch(e){
+        console.warn("ZI: storage error", e);
+        toastMsg("خطا در ذخیره‌سازی");
+    }
+}
+
+/* ---------------- نشانگر ذخیره ---------------- */
+let flashTimer = null;
+function flashSaveDot(){
+    const dot = document.getElementById("saveDot");
+    if(!dot) return;
+    dot.classList.remove("flash");
+    void dot.offsetWidth; /* reflow برای restart انیمیشن */
+    dot.classList.add("flash");
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(()=>{
+        dot.style.opacity = ".6";
+        setTimeout(()=>{ dot.style.opacity = "0"; }, 400);
+    }, 800);
+}
+
+/* =========================================================
+   items — بارگذاری شده از ذخیره + پیش‌فرض
+========================================================= */
+let items = loadFromStorage();
 
 /* =========================================================
    قوانین عملیات بر اساس نوع
@@ -900,7 +1010,7 @@ function scorePhrase(normText, tokensArr, phrase){
     if(normText.includes(np)) return np.length * 2 + 6;
     const pt = np.split(" ").filter(Boolean);
     if(!pt.length) return 0;
-    const allIn = pt.every(p => tokensArr.some(t => t === p || t.startsWith(p) || t.startsWith(t)));
+    const allIn = pt.every(p => tokensArr.some(t => t === p || t.startsWith(p) || p.startsWith(t)));
     if(allIn) return np.length + 3;
     return 0;
 }
@@ -1097,9 +1207,10 @@ function executeCommand(cmd){
     }
 
     applyMultiple(found[0], actions);
-    lastResults = { found, applied: true };
+    saveToStorage();           /* ← ذخیره در مرورگر */
     renderResults();
     showResultsView();
+    updateInfo();
 
     const st = found[0].master;
     const msg = st === "continuous" ? "✓ " + found[0].name + " آماده‌ی استفاده"
@@ -1222,12 +1333,12 @@ function renderResults(){
     }
 
     if(lastResults && lastResults.found && lastResults.found.length){
-        const ids = new Set(lastResults.found.map(x=>x.id));
+        const codes = new Set(lastResults.found.map(x=>x.code));
         const top = lastResults.found.filter(x=>{
             if(currentFilter === "archive") return x.archived;
             return !x.archived;
         });
-        const rest = list.filter(x=>!ids.has(x.id));
+        const rest = list.filter(x=>!codes.has(x.code));
         list = top.concat(rest);
     }
 
@@ -1283,22 +1394,22 @@ function renderCard(item){
     let quick = "";
     if(item.archived){
         quick = `<div class="quick">
-            <button onclick="quickUnarchive('${item.id}')">
+            <button onclick="quickUnarchive('${item.code}')">
                 <i class="fas fa-rotate-left"></i> بازگرداندن از بایگانی
             </button>
         </div>`;
     }else{
         quick = `<div class="quick">
-            <button class="cont" onclick="quickContinuous('${item.id}')">
+            <button class="cont" onclick="quickContinuous('${item.code}')">
                 <i class="fas fa-circle-check"></i> پیوسته
             </button>
-            <button onclick="quickNeutral('${item.id}')">
+            <button onclick="quickNeutral('${item.code}')">
                 <i class="fas fa-circle-half-stroke"></i> خنثی
             </button>
-            <button class="disc" onclick="quickDisconnect('${item.id}')">
+            <button class="disc" onclick="quickDisconnect('${item.code}')">
                 <i class="fas fa-circle-exclamation"></i> گسسته
             </button>
-            <button onclick="quickArchive('${item.id}')">
+            <button onclick="quickArchive('${item.code}')">
                 <i class="fas fa-box-archive"></i> بایگانی
             </button>
         </div>`;
@@ -1346,31 +1457,42 @@ function renderCard(item){
 }
 
 /* ---------------- Quick actions ---------------- */
-function findItem(id){ return items.find(x=>x.id === id); }
+/* نکته: حالا با code کار می‌کنند، نه با id رندوم — پایدار و قابل ذخیره */
+function findItem(code){ return items.find(x=>x.code === code); }
 
-function quickContinuous(id){
-    const item = findItem(id); if(!item) return;
-    setContinuous(item); renderResults(); updateInfo();
+function quickContinuous(code){
+    const item = findItem(code); if(!item) return;
+    setContinuous(item);
+    saveToStorage();           /* ← ذخیره */
+    renderResults(); updateInfo();
     toastMsg("✓ " + item.name + " آماده‌ی استفاده");
 }
-function quickNeutral(id){
-    const item = findItem(id); if(!item) return;
-    setNeutral(item); renderResults(); updateInfo();
+function quickNeutral(code){
+    const item = findItem(code); if(!item) return;
+    setNeutral(item);
+    saveToStorage();
+    renderResults(); updateInfo();
     toastMsg("○ " + item.name + " خنثی");
 }
-function quickDisconnect(id){
-    const item = findItem(id); if(!item) return;
-    setDisconnected(item, "صلاحیت استفاده ندارد"); renderResults(); updateInfo();
+function quickDisconnect(code){
+    const item = findItem(code); if(!item) return;
+    setDisconnected(item, "صلاحیت استفاده ندارد");
+    saveToStorage();
+    renderResults(); updateInfo();
     toastMsg("◌ " + item.name + " گسسته");
 }
-function quickArchive(id){
-    const item = findItem(id); if(!item) return;
-    setArchived(item); renderResults(); updateInfo();
+function quickArchive(code){
+    const item = findItem(code); if(!item) return;
+    setArchived(item);
+    saveToStorage();
+    renderResults(); updateInfo();
     toastMsg("⌁ " + item.name + " بایگانی شد");
 }
-function quickUnarchive(id){
-    const item = findItem(id); if(!item) return;
-    setUnarchived(item); renderResults(); updateInfo();
+function quickUnarchive(code){
+    const item = findItem(code); if(!item) return;
+    setUnarchived(item);
+    saveToStorage();
+    renderResults(); updateInfo();
     toastMsg("↺ " + item.name + " از بایگانی خارج شد");
 }
 window.quickContinuous = quickContinuous;
@@ -1524,6 +1646,9 @@ document.querySelectorAll('.sidebar-nav .nav-item').forEach(item=>{
             closeSidebarPanel(); return;
         }
         if(page === 'print'){ openJson(); closeSidebarPanel(); return; }
+        if(page === 'export-backup'){ exportBackup(); closeSidebarPanel(); return; }
+        if(page === 'import-backup'){ importBackup(); closeSidebarPanel(); return; }
+        if(page === 'reset-storage'){ resetStorage(); closeSidebarPanel(); return; }
         closeSidebarPanel();
     };
 });
@@ -1540,7 +1665,104 @@ document.getElementById("backBtn").onclick = ()=>{
     document.querySelector('.sidebar-nav .nav-item[data-page="home"]').classList.add('active');
 };
 
-/* ---------------- JSON ---------------- */
+/* =========================================================
+   پشتیبان‌گیری و بازیابی
+========================================================= */
+function exportBackup(){
+    const data = {
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        theme: document.documentElement.getAttribute("data-theme"),
+        items: items
+    };
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `zi_backup_${new Date().toISOString().slice(0,10)}.json`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toastMsg('پشتیبان دانلود شد');
+}
+
+function importBackup(){
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json,application/json';
+    input.onchange = e=>{
+        const file = e.target.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = ev=>{
+            try{
+                const parsed = JSON.parse(ev.target.result);
+                /* پشتیبانی از دو فرمت: مستقیم آرایه، یا آبجکت با .items */
+                let newItems = null;
+                if(Array.isArray(parsed)){
+                    newItems = parsed;
+                }else if(parsed && Array.isArray(parsed.items)){
+                    newItems = parsed.items;
+                }
+
+                if(!newItems){
+                    toastMsg('فایل معتبر نیست');
+                    return;
+                }
+
+                /* ادغام: فقط کدهایی که در RAW_ITEMS هستند حفظ می‌شوند */
+                const dict = {};
+                newItems.forEach(x=>{
+                    if(x && x.code) dict[x.code] = x;
+                });
+
+                items = RAW_ITEMS.map(raw=>{
+                    const base = defaultItem(raw);
+                    const s = dict[raw.code];
+                    if(!s) return base;
+                    return {
+                        code: base.code,
+                        name: base.name,
+                        type: base.type,
+                        material: base.material,
+                        color: base.color,
+                        master: s.master || "neutral",
+                        reason: s.reason || "",
+                        operations: Object.assign({}, base.operations, s.operations || {}),
+                        archived: !!s.archived,
+                        updatedAt: s.updatedAt || null
+                    };
+                });
+
+                saveToStorage();
+                renderResults();
+                updateInfo();
+                toastMsg('پشتیبان بازیابی شد');
+            }catch(err){
+                toastMsg('خطا در خواندن فایل');
+            }
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+}
+
+function resetStorage(){
+    if(!confirm('همه‌ی وضعیت‌های ذخیره‌شده پاک شوند؟')) return;
+    try{
+        localStorage.removeItem(STORAGE_KEY);
+    }catch(e){}
+    /* بازگرداندن به وضعیت پیش‌فرض */
+    items = RAW_ITEMS.map(defaultItem);
+    renderResults();
+    updateInfo();
+    renderFilterGrid();
+    toastMsg('حافظه پاک شد');
+}
+
+/* =========================================================
+   JSON
+========================================================= */
 const jsonOverlay = document.getElementById("jsonOverlay");
 const jsonContent = document.getElementById("jsonContent");
 
@@ -1574,7 +1796,9 @@ document.getElementById("downloadJson").onclick = ()=>{
     toastMsg('دانلود شد');
 };
 
-/* ---------------- Toast ---------------- */
+/* =========================================================
+   Toast
+========================================================= */
 let toastTimer = null;
 function toastMsg(msg){
     const t = document.getElementById("toast");
@@ -1584,7 +1808,9 @@ function toastMsg(msg){
     toastTimer = setTimeout(()=> t.classList.remove("show"), 2400);
 }
 
-/* ---------------- Stats ---------------- */
+/* =========================================================
+   Stats
+========================================================= */
 function updateInfo(){
     const cont = items.filter(i=>!i.archived && i.master === 'continuous').length;
     const neut = items.filter(i=>!i.archived && i.master === 'neutral').length;
@@ -1600,11 +1826,12 @@ function updateInfo(){
     document.getElementById("badgeArch").textContent = arch;
 
     document.getElementById("info").textContent =
-        `${cont} پیوسته • ${neut} خنثی • ${disc} گسسته • ${arch} بایگانی`;
+        `${cont} پیوسته • ${neut} خنثی • ${disc} گسسته • ${arch} بایگانی • ذخیره خودکار ✓`;
 }
 
-/* ---------------- Init ---------------- */
-document.documentElement.setAttribute("data-theme", "dark");
+/* =========================================================
+   Init
+========================================================= */
 renderFilterGrid();
 updateInfo();
 </script>
